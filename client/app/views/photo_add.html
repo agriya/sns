@@ -1,0 +1,39 @@
+<main>
+    <div class="section p-top-btm upload" ng-controller="PhotoaddController">
+        <form name="myForm" ng-submit="PhotoUpload()">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-7">
+                                <div class="upload-drag">
+                                    <div class="upload-vcenter">
+                                        <ul class="list-unstyled navbar-btn text-center">
+                                            <li>
+                                                <h3 class="h1">DRAG &amp; DROP</h3>
+                                            </li>
+                                            <li class="mtop15">
+                                                <a href="" title="profile"><img ng-src="{{photo_url}}" width="190" height="134"></a>
+                                            </li>
+                                            <li class="ver-bot-mspace-50"> <span>or</span><input type="file" ngf-select ng-model="file" name="file" ng-change="upload(file)" class="underline text-red" accept="image/*" required></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5">
+                                <form class="bg-bor profile-form">
+                                    <div class="form-group"> <label for="exampleInputPassword1">description</label> <input type="text" class="form-control mbtm-smspace" id="exampleInputPassword1" ng-model="attachment.description" placeholder="Give your picture a short description">                                        </div>
+                                    <tags-input ng-model="tags">
+                                        <!--<auto-complete source="loadTags($query)"></auto-complete>-->
+                                    </tags-input>
+                                </form>
+                            </div>
+                            <div class="ver-top-mspace-20"> <a href="" class="btn btn-default tags">tag</a> <a href="" class="btn btn-default tags">tag</a> <a href="" class="btn btn-default tags">tag</a> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12"><button type="submit" class="btn btn-md btn-bg pull-right fa-inverse bor-rad-large text-11">Update</button> </div>
+            </div>
+        </form>
+    </div>
+</main>

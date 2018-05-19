@@ -1,0 +1,73 @@
+<section class="designers">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 no-pad" id="banner">
+                <div class="well text-center" id="banner-text">
+                    <h2 class="text-48 play-fair-display">{{'Fashion fades, only style remains the same.'|translate}}</h2>
+                    <p class="h4 well-lg">{{'— Coco Chanel —'|translate}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 no-pad">
+                <ul class="breadcrumb text-center" affixer>
+                    <li> <a href="designer/popular">{{'Popular'|translate}}</a></li>
+                    <li ng-show="!$root.isAuth"> <a href="" ng-click="openLoginModal('/designer/following','/designer/recent')">{{'Following'|translate}}</a> </li>
+                    <li ng-show="$root.isAuth"> <a href="designer/following">{{'Following'|translate}}</a> </li>
+                    <li class="active">{{'Recent'|translate}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-controller='recentController'>
+        <div class="row" infinite-scroll-disabled="!enabled" infinite-scroll='pagination()' infinite-scroll-distance='2'>
+            <!--carousel 1-->
+            <div class="carousel slide col-xs-12" id="myCarousel-{{$index}}" ng-repeat="(key, user) in users">
+                <div class="row">
+                    <!-- left side -->
+                    <div class="col-md-2 col-sm-3 text-center left-block">
+                        <div>
+                            <a href="profile/{{user.id}}/{{user.username}}" data-toggle="modal" data-target="#img-modal" class="img-circle img-thumbnail img-white-cir"> <img ng-src="{{user.user_avatar_url}}" alt="[Image: Profile-thumb]" class="img-responsive center-block img-circle"> </a>
+                            <a href="profile/{{user.id}}/{{user.username}}">
+                                <h4 class="list-group-item-text blackc">{{user.username}}</h4>
+                            </a>
+                            <p class="text-muted">{{user.address}}</p>
+                            <p class="text-black text-12 text-bold btn-follow">{{user.user_follower_count}} {{'followers'|translate}}</p>
+                            <a href="" ng-click="openLoginModal()"> <button type="button" ng-show="!$root.isAuth" class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button></a> <button type="button" ng-click="user_follow(user)" ng-show="$root.user.id !== user.id && !follow[user.id].isfollow && $root.isAuth"
+                                class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button>
+                            <div class="hover" ng-show="$root.user.id !== user.id && follow[user.id].isfollow && $root.isAuth"> <a href="" ng-click="user_unfollow(user,follow)" ng-mouseenter="following($index)" id="following-{{$index}}" ng-mouseleave="unfollow($index)" class="text-12 following">{{'Following'|translate}}</a> </div>
+                        </div>
+                        <div class="designers-btn"> <button type="button" class="btn btn-link" ng-click="openFlagModal(user,key)">
+                                <i data-target="#myCarousel-{{$index}}" data-slide-to="0" class="fa fa-circle-o text-10" class="active"></i>
+                                <i data-target="#myCarousel-{{$index}}" data-slide-to="1" class="fa fa-circle-o text-10"></i>
+                                <i data-target="#myCarousel-{{$index}}" data-slide-to="2" class="fa fa-circle-o text-10"></i>
+                            </button> </div>
+                    </div>
+                    <div class="Carousel" bc-flickity="{{user.flickityOptions}}" id="user_id{{user.id}}">
+                        <figure class="Carousel carousel-cell user_id{{user.id}}" data-ng-repeat="photo in user.photos track by $index">
+                            <div class="hover ehover1" ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)" ng-mouseenter="cc($index,user,key)">
+                                <a href="discover/{{photo.id}}/{{$index}}" class="img-bg"> <img ng-if="photo.is_video == false && photo.is_attachment_to_view == true" data-flickity-lazyload="{{photo.photos_url}}" alt="" /> <video id="video" ng-src="{{photo.video_url}}" controls="true" ng-if="photo.is_video == true && photo.is_attachment_to_view == true" width="380" height="370"></video></a>
+                                <div class="overlay fa-inverse">
+                                    <div class="hover-text clearfix">
+                                        <h3 class="h1 htruncate hyphens">{{photo.description}}</h3>
+                                        <div class="vcenter">
+                                            <div>
+                                                <div class="pull-left">
+                                                    <div class="pull-left" ng-click="go(user.id,user.username)"><img ng-src="{{user.user_avatar_url}}" width="34" height="34" class="img-circle" alt="[Image: User-img]" title="{{photo.user.username}}"></div>
+                                                    <h5 ng-click="go(user.id,user.username)" class="pull-left hor-space">{{user.username}}</h5>
+                                                </div>
+                                                <div class="pull-right navbar-btn"> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)" ng-show="!photo.is_like"><i class="fa fa-fw fa-heart fa-inverse"></i>{{photo.photo_like_count}}</a> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)"
+                                                        ng-show="photo.is_like"><i class="fa fa-fw fa-heart text-danger"></i>{{photo.photo_like_count}}</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <!---carousel 1 ending-->
+        </div>
+    </div>
+</section>

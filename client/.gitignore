@@ -1,0 +1,8 @@
+/app/images/large_thumb
+/app/images/medium_thumb
+/app/images/small_thumb
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components

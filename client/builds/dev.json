@@ -1,0 +1,9 @@
+{
+	"db_user": "nginxpg",
+	"db_password": "xXVzKIqBC",
+	"db_name": "instagram",
+	"sftp_upload_path": "/home/nginxpg/html/instagram",
+	"sftp_host": "nginxpg.develag.com",
+	"sftp_username": "nginxpg",
+    "sftp_password": "xXVzKIqBC"
+}

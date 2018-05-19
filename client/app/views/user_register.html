@@ -1,0 +1,50 @@
+<div class="section" ng-controller='UsersRegisterCtrl'>
+    <div class="">
+        <div class="">
+            <div class="">
+                <form class="form-horizontal" role="form" name="userSignup" ng-submit="save()">
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputFirstName3" class="control-label">{{'First Name'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="text" ng-model="user.first_name" class="form-control" id="inputFirstName3" placeholder="First Name" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputLastName3" class="control-label">{{'Last Name'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="text" ng-model="user.last_name" class="form-control" id="inputLastName3" placeholder="Last Name" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputEmail3" class="control-label">{{'E-mail'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="email" ng-model="user.email" class="form-control" id="inputEmail3" placeholder="E-mail" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputMobile3" class="control-label">{{'Mobile'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="number" ng-model="user.mobile" class="form-control" id="inputMobile3" placeholder="Mobile" autocomplete="off"> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputUsername3" class="control-label">{{'Username'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="text" ng-model="user.username" class="form-control" id="inputUsername3" placeholder="Username" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputPassword3" class="control-label">{{'Password'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="password" ng-model="user.password" class="form-control" id="inputPassword3" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.repeat_password.pattern = this.value;"
+                                placeholder="Password" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"> <label for="inputRepeatPassword3" class="control-label">{{'Repeat Password'|translate}}</label> </div>
+                        <div class="col-sm-8"> <input type="password" class="form-control" name="repeat_password" id="inputRepeatPassword3" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                                placeholder="Repeat Password" autocomplete="off" required> </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <div class="checkbox"> <label>
+                        <input type="checkbox" ng-model="user.is_agree_terms_conditions" required><span>{{'I have read and accepted the'|translate}}</span> <a href="pages/2/terms-and-conditions" target="_blank">{{'Terms and conditions'|translate}}</a> {{'and'|translate}} <a href="pages/1/privacy-policy" target="_blank">{{'Privacy policy'|translate}}</a>
+                        </label> </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8"> <button type="submit" ng-show="save_btn" class="btn btn-block btn-primary disabled">{{'Sign up'|translate}}</button> <button type="submit" ng-show="!save_btn" class="btn btn-block btn-primary">{{'Sign up'|translate}}</button> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

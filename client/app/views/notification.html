@@ -1,0 +1,31 @@
+<div class="container notifications" ng-controller='notificationController'>
+    <div class="row collapse-block" infinite-scroll-disabled="!enabled" infinite-scroll='pagination()' infinite-scroll-distance='2'>
+        <div class="panel no-bg no-border" ng-repeat="(key,value) in notifications">
+            <div class="white-bg panel-heading ver-mspace clearfix" role="tab" id="headingThree">
+                <a class="collapsed clearfix show" role="button" ng-init="isCollapsed=($index==0)? true:false" ng-click="isCollapsed = !isCollapsed"> <span class="pull-left show">{{ value[0].created_at| amDateFormat:value[0].group_type }}</span> <span class="pull-right small" ng-show="isCollapsed && value[0].is_read === false" ng-click="MarkAll(value[0].created_at, value[0].group_type)"> Mark all as read</span>                    <span ng-show="!isCollapsed" class="pull-right"><i class="fa fa-caret-down"></i></span> <span ng-show="isCollapsed &&  value[0].is_read === true" class="pull-right"><i class="fa fa-caret-up"></i></span> </a>
+            </div>
+            <div uib-collapse="!isCollapsed" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                <div class="panel-body no-pad">
+                    <ul class="list-unstyled white-bg pspace10 p-bot-0 notify-list">
+                        <li class="media" ng-repeat="notification in value"> <span ng-class="{'read-msg' : {{notification.is_read}} === true}">
+                            <a class="media-left" href="profile/{{notification.user.id}}/{{notification.user.username}}"><img class="media-object img-circle" ng-src="{{notification.user_avatar_url}}" height="40
+                " width="40" alt="[Image: User-img]" title="User-img"></a>
+                            <div class="media-body">
+                                <h5 ng-show="notification.type=='Following'"><span class="text-bold"><a class="blackc" href="profile/{{notification.user.id}}/{{notification.user.username}}">{{notification.user.username}} </a></span>{{notification.type}}
+                            your. <span class="pull-right">{{notification.created_at | amDateFormat: 'h:mm a'}}</span> </h5>
+                            <h5 ng-show="notification.type=='Likes'"><span class="text-bold"><a class="blackc" href="profile/{{notification.user.id}}/{{notification.user.username}}">{{notification.user.username}} </a></span>{{notification.type}} your Photo. <span class="pull-right ">{{notification.created_at | amDateFormat: 'h:mm a'}}</span>                                </h5>
+                            <h5 ng-show="notification.type=='Comment'"><span class="text-bold"><a class="blackc" href="profile/{{notification.user.id}}/{{notification.user.username}}">{{notification.user.username}}</a> </span>{{notification.type}} your Photo. <span class="pull-right ">{{notification.created_at | amDateFormat: 'h:mm a'}}</span>                                </h5>
+                            <h5 ng-show="notification.type=='Post'"><span class="text-bold"><a class="blackc" href="profile/{{notification.user.id}}/{{notification.user.username}}">{{notification.user.username}}</a> </span>mentioned you in a {{notification.type}} <span class="pull-right ">{{notification.created_at | amDateFormat: 'h:mm a'}}</span>                                </h5>
+                </div>
+                </span>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="!Object.keys(notifications).length">
+    <p class="text-center" ng-show="loader">{{'loading...'|translate}}</p>
+    <p class="text-center" ng-show="noRecord && !loader">{{'No Notification Found'|translate}}</p>
+</div>
+</div>

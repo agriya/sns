@@ -1,0 +1,31 @@
+<div> 
+    <div class="row">                    
+        <div class="col-sm-12">
+            <h4 class="navbar-brand">{{'Following'|translate}}</h4>             
+        </div>      
+    </div>      
+    <ul class="well">
+        <li ng-repeat="following in user_following">
+            <div class="row">                    
+                    <div class="col-md-12">
+                    <div class="col-md-2">                           
+                        <div class="pull-left"><img class="img-circle" ng-src="{{following.user_avatar_url}}" height="48" width="48"></div>                                    
+                    </div>
+                        <div class="col-md-7">                                   
+                        <div>                                
+                            <h4 class="no-mar"> <span >{{following.following_user.username}}</span></h4> 
+                            <span>{{following.following_user.about_me}}</span>                                    
+                        </div>                            
+                    </div>
+                    <div class="col-md-3 pull-right">                                
+                        <div class="form-group">                                   
+                            <a href="" ng-if="!$root.isAuth" ng-click="openLoginModal()"> {{'Follow'|translate}} </a> 
+                            <button type="button" ng-click="user_follow(following,$index)" ng-if="$root.isAuth && $root.user.id !== following.following_user.id && !following.following_user.isfollow" class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button>                            
+                            <div class="hover" ng-show="$root.isAuth && $root.user.id !== following.following_user.id && following.following_user.isfollow"> <a href="" ng-click="user_unfollow(following,$index)" ng-mouseenter="followings($index)" id="following-{{$index}}" ng-mouseleave="unfollow($index)" class="text-12 following">{{'Following'|translate}}</a> </div>
+                        </div>                                                                              
+                    </div>
+                </div>                                                                              
+            </div>                                       
+        </li>
+    </ul>
+</div>

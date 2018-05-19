@@ -1,0 +1,32 @@
+<div> 
+    <div class="row">                    
+        <div class="col-sm-12">
+            <h4 class="navbar-brand">{{'Followers'|translate}}</h4>             
+        </div>
+    </div>                
+    <ul class="well">
+        <li ng-repeat="follower in user_followers">
+            <div class="row">                    
+                    <div class="col-md-12">
+                    <div class="col-md-2">                           
+                        <div class="pull-left"><img class="img-circle" ng-src="{{follower.user_avatar_url}}" height="48" width="48"></div>                                    
+                    </div>
+                        <div class="col-md-7">                                   
+                        <div>                                
+                            <h4 class="no-mar"> <span >{{follower.user.username}}</span></h4> 
+                            <span>{{follower.user.about_me}}</span>                                    
+                        </div>                            
+                    </div>
+                    <div class="col-md-3 pull-right">                                
+                        <div class="form-group">                 
+                            <a href="" ng-if="!$root.isAuth" ng-click="openLoginModal()"> {{'Follow'|translate}} </a> 
+                            <button type="button" ng-click="user_follow(follower,$index)" ng-if="$root.isAuth && $root.user.id !== follower.user.id && !follower.user.isfollow" class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button>                            
+                            <div class="hover" ng-show="$root.isAuth && $root.user.id !== follower.user.id && follower.user.isfollow"> <a href="" ng-click="user_unfollow(follower,$index)" ng-mouseenter="following($index)" id="following-{{$index}}" ng-mouseleave="unfollow($index)" class="text-12 following">{{'Following'|translate}}</a> </div>
+                       </div>                                                                              
+                    </div>
+                </div>                                                                              
+            </div>    
+            <br/>                      
+        </li>
+    </ul>        
+</div>

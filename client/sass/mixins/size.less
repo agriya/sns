@@ -1,0 +1,16 @@
+// Sizing shortcuts
+
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+.square(@size) {
+  .size(@size; @size);
+}
+.pad(@top, @right, @bottom, @left) {
+  padding: @top @right @bottom @left;
+}
+.mar(@top, @right, @bottom, @left) {
+  margin: @top @right @bottom @left;
+}

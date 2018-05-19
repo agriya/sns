@@ -1,0 +1,149 @@
+
+/* Admin Styles */
+
+body{
+	&.adminLogin{
+		.useradminpannel{
+			padding:3px 10px;
+			h1{
+				margin:0;
+				
+				a{
+					margin:0;
+				}
+			}
+		}
+	}
+	&.admin{
+		background:@white;
+		.form-horizontal{
+			 .submit-block{
+			 	    margin: 10px 0px 10px 150px;
+			 	.submit {
+			 	    margin-left: 0;
+				}
+			 }
+			 .form-block {
+			 	legend {
+					padding:5px;
+				}
+			 }
+			 .clsHcancel, .cancel-block{
+			 	margin:0 10px 0 0;
+			 	a {
+					height:auto;
+				}
+			 }
+			 .clsBrowseH {
+			 	   margin-bottom: 10px;
+   				   margin-left: 150px;
+				   input[type="file"] {
+				   	left:0;
+				   }
+			 }
+			 .clsHeight.textarea {
+			 	textarea {
+					height:150px;
+				}
+			 }
+			 &.clsEditTransactionForm {
+			 	label {
+					display: inline-block;
+					margin: 0;
+					padding: 5px 5px 0 10px;
+					text-align: left;
+					width: 140px;
+				}
+			 }
+			 .error-message {
+			 	  margin: 5px 0 0 155px;
+			 }
+		}
+		#main{
+			padding:0;
+		}
+		.users-form {
+			.normal.form-search {
+					width: 300px;
+					background:#F2F2F2;
+					border:1px solid #ddd;
+				.input {
+					input[type='text'] {
+						box-shadow: none;
+						padding: 4px 5px;
+						width: 180px;
+					}
+				}
+				.submit {
+					 margin: 0 10px 0 0;
+					input[type='submit'] {
+						font-weight: normal;
+						padding: 8px;
+						text-align: center;
+						width: 80px;
+						color:#fff;
+						&:hover {
+							color: #fff;
+							background: #0094d2;
+							box-shadow:none;
+						}
+					}
+				}
+				&.clsMessageForm {
+					width:auto;
+					.submit {
+						position:static;
+					}
+					select{
+						width:180px;
+						height:32px;
+						box-shadow:none;
+					}
+					input {
+						box-shadow: none;
+						padding: 4px 5px;
+						width: 180px;
+						border:1px solid #ddd;
+					}
+				}
+			}
+		}
+		ul.breadcrumb {
+			li {
+				span.divider{
+					display:none;
+				}
+			}
+		}
+		.nav-collapse.collapse.in{
+			height:auto;
+		}
+		.sep-primary.clsBgHeader {
+					border-color:#00698C;
+				}
+				#SettingAdminEditForm {
+					.form-horizontal.check-align {
+						.clsHdSetting {
+							border: 0 none;
+							color: hsl(0, 0%, 100%);
+							display: block;
+							font-size: 16px;
+							font-weight: bold;
+							line-height: 24px;
+							margin-bottom: 20px;
+							padding: 8px 10px;
+							width: 100%;
+							background:#5BC0DE;
+							font-family: Georgia-Italic;
+								span {
+									font-size: 16px;
+									font-weight: bold;
+									line-height: 24px;
+									color:#fff;
+									font-family: Georgia-Italic;
+								}
+						}
+					}
+				}
+	}
+}

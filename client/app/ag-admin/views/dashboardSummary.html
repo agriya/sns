@@ -1,0 +1,156 @@
+<div class="dashboard_summary" ng-controller="StatsCtrl">
+    <!--<div class="row dashboard_custom_panel">
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-users fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminstats.users}}</div>
+                            <div>Users</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/users/list?search={"is_active":"true"}'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-picture-o fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminstats.photos}}</div>
+                            <div> Photos</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/photos/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-comments-o fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminstats.comments}}</div>
+                            <div>comments</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/photo_comments/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-twitter  fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminstats.follows}}</div>
+                            <div>Follows</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/user_follows/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 navbar-btn">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3"> <i class="fa fa-heart-o fa-5x"></i> </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{adminstats.favorites}}</div>
+                            <div>Likes</div>
+                        </div>
+                    </div>
+                </div>
+                <a href='#/photo_likes/list'>
+                    <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>-->
+    <div class="row dashboard_custom_panel">
+        <div class="col-lg-12 navbar-btn">
+            <div class="panel-heading"> <a class="">STATISTICS</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>User</th>
+                            <th>User Logins</th>
+                            <th>User Follows</th>
+                            <th>Photos</th>
+                            <th>Photo Views</th>
+                            <th>Photo Likes</th>
+                            <th>Photo Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Today</th>
+                            <td>{{statistic.today.users}}</td>
+                            <td>{{statistic.today.user_logins}}</td>
+                            <td>{{statistic.today.user_follows}}</td>
+                            <td>{{statistic.today.photos}}</td>
+                            <td>{{statistic.today.photo_views}}</td>
+                            <td>{{statistic.today.photo_likes}}</td>
+                            <td>{{statistic.today.photo_comments}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last Week</th>
+                            <td>{{week_Stats.users}}</td>
+                            <td>{{week_Stats.user_logins}}</td>
+                            <td>{{week_Stats.user_follows}}</td>
+                            <td>{{week_Stats.photos}}</td>
+                            <td>{{week_Stats.photo_views}}</td>
+                            <td>{{week_Stats.photo_likes}}</td>
+                            <td>{{week_Stats.photo_comments}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last Month</th>
+                            <td>{{month_Stats.users}}</td>
+                            <td>{{month_Stats.user_logins}}</td>
+                            <td>{{month_Stats.user_follows}}</td>
+                            <td>{{month_Stats.photos}}</td>
+                            <td>{{month_Stats.photo_views}}</td>
+                            <td>{{month_Stats.photo_likes}}</td>
+                            <td>{{month_Stats.photo_comments}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Last Year</th>
+                            <td>{{year_Stats.users}}</td>
+                            <td>{{year_Stats.user_logins}}</td>
+                            <td>{{year_Stats.user_follows}}</td>
+                            <td>{{year_Stats.photos}}</td>
+                            <td>{{year_Stats.photo_views}}</td>
+                            <td>{{year_Stats.photo_likes}}</td>
+                            <td>{{year_Stats.photo_comments}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

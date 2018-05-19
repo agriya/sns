@@ -1,0 +1,107 @@
+<section class="profile" ng-controller="profileController">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 no-pad banner-hover">
+                <div class="profile-banner fa-inverse"> <img ng-src="{{user.user_coverphoto_url}}" alt="[Image: Profile-banner]" title="Profile-banner" class="img-responsive">
+                    <div class="bottom-text">
+                        <ul class="list-inline pull-left text-left col-sm-offset-2">                            
+                            <li ng-click="user_follower(user)">{{user.user_follower_count}} {{'followers'|translate}}</li>
+                            <li ng-click="user_following(user)">{{user.user_following_count}} {{'following'|translate}}</li>
+                            <li>{{user.photo_count}} {{'posts'|translate}}</li>
+                        </ul>
+                        <div class="row no-mar">
+                            <ul class="list-inline pull-right col-sm-3">
+                                <li ng-show="user.facebook_username!==null"> <a href="https://www.facebook.com/{{user.facebook_username}}"><i class="fa fa-fw fa-lg fa-facebook fa-inverse"></i></a> </li>
+                                <li ng-show="user.twitter_username!==null"> <a href="https://www.twitter.com/{{user.twitter_username}}"><i class="fa fa-fw fa-lg fa-twitter fa-inverse"></i></a> </li>
+                                <li ng-show="user.Sns_username!==null"> <a href="https://www.Sns.com/{{Sns_username}}"><i class="fa fa-fw fa-lg fa-Sns fa-inverse"></i></a> </li>
+                                <li ng-show="user.etsy_username!==null"> <a href="https://www.etsy.com.com/{{user.etsy_username}}"><i class="icon-m-etsy fa-inverse"></i></a> </li>
+                                <li ng-show="user.linkedin_username!==null"> <a href="https://www.linkedin.com.com/{{user.linkedin_username}}"><i class="fa fa-linkedin fa-inverse fa-lg"></i></a> </li>
+                                <li ng-show="user.medium_username!==null"> <a href="https://www.medium.com//{{user.medium_username}}"><i class="fa fa-medium fa-inverse fa-lg"></i></a> </li>
+                                <li ng-show="user.youtube_username!==null"> <a href="https://www.youtube.com.com/{{user.youtube_username}}"><i class="fa fa-youtube fa-inverse fa-lg"></i></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cover-pic-text" ng-show="$root.isAuth && $root.user.id === user.id">
+                        <div ngf-select="" ng-model="coverfile" ngf-drop="" ngf-model-invalid="invalidFiles" ng-change="upload(coverfile, 'UserCoverPhoto')" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect"
+                            ng-disabled="disabled" ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="{width: 520, height: 560}" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)"
+                            ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="orientation" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir"
+                            class="drop-box ng-pristine ng-valid" ngf-drop-available="dropAvailable">
+                            <h5><i class="icon-m-image"></i>{{'Upload cover picture'|translate}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 no-pad">
+                <div class="pull-left">
+                    <div class="text-center">
+                        <div class="profile-image">
+                            <div> <img ng-src="{{user.user_avatar_url}}" class="img-responsive img-circle center-block" alt="[Image: Round-lady-Thumb]" title="Round-lady-Thumb">
+                                <div ng-show="$root.isAuth && $root.user.id === user.id" class="photo-image" ngf-select=""
+                                    ng-model="file" ngf-drop="" ngf-model-invalid="invalidFiles" ng-change="upload(file, 'UserAvatar')" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled"
+                                    ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="{width: 520, height: 560}" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)"
+                                    ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="orientation" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations"
+                                    ngf-allow-dir="allowDir" class="drop-box ng-pristine ng-valid" ngf-drop-available="dropAvailable">
+                                    <div class="professional-image">
+                                        <div class="fa-inverse image-content"> <i class="fa fa-camera"></i> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-caption">
+                            <h4 class="list-group-item-text">{{user.username}}</h4>
+                            <p class="text-muted">{{user.city}}{{user.state}}{{user.country}}</p>
+                            <a href="" ng-click="openLoginModal()"> <button type="button" ng-show="!$root.isAuth" class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button></a> <button type="button" ng-click="user_follow(user)" ng-show="$root.user.id !== user.id && !user.isfollow && $root.isAuth"
+                                class="btn btn-primary btn-lg text-12 btn-follow">{{'Follow'|translate}}</button> <a href="" ng-mouseenter="following()" id="following" ng-mouseleave="unfollow()" ng-click="user_unfollow(user)" ng-show="$root.user.id !== user.id && user.isfollow && $root.isAuth"
+                                class="text-12 following">{{'Following'|translate}}</a> </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 pull-right">
+                        <dl class="dl-horizontal"> <dt ng-show="user.about_me !== '' && user.about_me !== null" class="navbar-btn">{{'Bio'|translate}}</dt>
+                            <dd ng-show="user.about_me !== '' && user.about_me !== null" class="navbar-btn">{{user.about_me}}</dd> <dt ng-show="user.educations !== '' && user.educations !== null">{{'Education'|translate}}</dt>
+                            <dd ng-show="user.educations !== '' && user.educations !== null">{{user.educations}}</dd> <dt ng-show="user.recognitions !== '' && user.recognitions !== null">{{'Recognitions'|translate}}</dt>
+                            <dd ng-show="user.recognitions !== '' && user.recognitions !== null">{{user.recognitions}}</dd> <dt ng-show="user.brands !== '' && user.brands !== null">{{'Brands'|translate}}</dt>
+                            <dd ng-show="user.brands !== '' && user.brands !== null">{{user.brands}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="img-block">
+        <div class="container">
+            <div class="row" ng-repeat="(key, value) in photos">
+                <ul class="list-inline col-xs-12 no-pad" infinite-scroll-disabled="!enabled" infinite-scroll='pagination()' infinite-scroll-distance='2'>
+                    <li ng-repeat="photo in value">                        
+                        <div class="hover ehover1" ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)">
+                            <a href="discover/{{photo.id}}/{{$index}}" class="img-bg">
+                                <!--<img ng-src="{{photo.photos_url}}" alt="[Image: Photo]"> -->
+                                <span ng-if="photo.is_video == false && photo.is_attachment_to_view == true" afkl-lazy-image="{{photo.photos_url}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span>                                 
+                                <span><video id="video" ng-src="{{photo.video_url}}" controls="true" ng-if="photo.is_video == true && photo.is_attachment_to_view == true" width="380" height="390"></video></span>
+                            </a>                            
+                            <div class="overlay fa-inverse">
+                                <div class="hover-text clearfix">
+                                    <h3 class="h1 htruncate hyphens">{{photo.description}}</h3>
+                                    <div class="vcenter">
+                                        <div>
+                                            <div class="pull-left">
+                                                <div class="pull-left"> <img ng-src="{{photo.user_avatar_url}}" width="34" height="34" class="img-circle" alt="[Image: User-img]" title="{{photo.user.username}}"> </div>
+                                                <h5 class="pull-left hor-space">{{photo.user.username}}</h5>
+                                            </div>
+                                            <div class="pull-right navbar-btn"> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)" ng-show="!photo.is_like"><i class="fa fa-fw fa-heart fa-inverse"></i>{{photo.photo_like_count}}</a> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)"
+                                                    ng-show="photo.is_like"><i class="fa fa-fw fa-heart text-danger"></i>{{photo.photo_like_count}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

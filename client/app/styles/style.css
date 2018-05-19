@@ -1,0 +1,79 @@
+/*
+Author: CSSilize http://www.cssilize.com/
+Date: 2016-08-01
+(c)2016 CSSilize. All rights reserved.
+*/
+
+.content {
+}
+
+/** common elements */
+/* TODO: h1,h2,etc */
+
+#header {
+}
+
+#footer {
+}
+
+/** common classes */
+/* TODO: form.normal, table.list, ul.list, ol.list, dl.list, etc */
+
+/** page-wise overrides */
+/* TODO: #pages-home table.list th {}, etc */
+
+/** JavaScript */
+/* Usually no need */
+
+/** Hacks */
+/* Usually no need */
+
+/** Cssilized by cssilize */
+p#cssilize {
+	padding:35px 0;	
+}
+p#cssilize a {
+	background:url(../images/cssilize.png) no-repeat center top;
+	height:17px;
+	width:118px;
+	display:block;
+	text-indent:-9999em;
+	margin:0 auto;
+}
+
+/* customized header part icons changes */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?ohnxn9');
+  src:  url('../fonts/icomoon.eot?ohnxn9#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?ohnxn9') format('truetype'),
+    url('../fonts/icomoon.woff?ohnxn9') format('woff'),
+    url('../fonts/icomoon.svg?ohnxn9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icons-"], [class*="icons-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icons-mmessage:before {
+  content: "\e900";
+}
+.icons-mnotification:before {
+  content: "\e901";
+}
+.icons-mupload:before {
+  content: "\e902";
+}

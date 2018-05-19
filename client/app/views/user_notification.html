@@ -1,0 +1,47 @@
+<div class="settings" ng-controller='UsersNotificationController'>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 left-side">
+                <div class="white-bg" ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 tab-content">
+                <!-- notifications-block -->
+                <div class="tab-pane active" id="notifications">
+                    <div class="row">
+                        <form role="form" name="userNotification" ng-submit="save()">
+                            <div class="col-sm-4">
+                                <h4 class="blackc bot-ver-space">{{'Activity Notifications'|translate}}</h4>
+                                <p>{{'Email me when:'|translate}}</p>
+                                <div class="checkbox"> <label for="follows">
+                                                	<input type="checkbox" value="1" id="follows" ng-model="user.is_enable_email_when_someone_follow_me">
+                                                	<span>{{'someone follows me'|translate}}</span>
+                                                 </label> </div>
+                                <div class="checkbox"> <label for="mentions">
+                                                	<input type="checkbox" value="2" id="mentions" ng-model="user.is_enable_email_when_someone_mentioned_me">
+                                                	<span>{{'someone mentions me'|translate}}</span>
+                                                </label> </div>
+                                <div class="checkbox"> <label for="post">
+                                                	<input type="checkbox" value="4" id="post" ng-model="user.is_enable_email_when_follow_post">
+                                                	<span>{{'someone follow post'|translate}}</span>
+                                                </label> </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="blackc bot-ver-space">{{'Mæsure Emails'|translate}}</h4>
+                                <p class="blackc">{{'Subscribe me to:'|translate}}</p>
+                                <div class="checkbox"> <label for="measure">                                                
+                                                     <input type="checkbox" value="1" id="measure" ng-model="user.is_enable_subscribe_me_for_newsletter">
+                                                     <span class="text-capitalize">{{'Mæsure Newsletter'|translate}}</span>
+                                                 </label> <span class="help-block">{{'Periodic news, announcements and product updates'|translate}}</span> </div>
+                                <div class="checkbox"> <label for="reply">
+                                                    <input type="checkbox" value="2" id="reply" ng-model="user.is_enable_subscribe_me_for_weeky_replay">
+                                                    <span class="text-capitalize">{{'Weekly Replay'|translate}}</span>
+                                                </label> <span class="help-block">{{'Weekly digest of top designs and designers'|translate}}</span> </div>
+                            </div>
+                            <div class="col-xs-12"> <button type="submit" class="btn btn-primary btn-lg">{{'Update'|translate}}</button> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

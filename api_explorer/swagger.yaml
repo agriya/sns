@@ -1,0 +1,5288 @@
+swagger: '2.0'
+info:
+  title: SNS API
+  description: SNS API for webservices
+  contact:
+    name: Agriya Infoway
+    url: 'http://www.agriya.com'
+    email: info@agriya.com
+  license:
+    name: Agriya Infoway Licence
+    url: 'http://www.agriya.com/'
+  version: v1.0b1
+produces:
+  - application/json
+paths:
+  /activities:
+    get:
+      summary: Fetch all Activities
+      description: Returns all Activities from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (read/unread)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string         
+      tags:
+        - Activity
+      responses:
+        '200':
+          description: Fetched Activities
+          schema:
+            $ref: '#/definitions/Activity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update Activity Status
+      description: Update Activity Status
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Activity JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/updateActivity'
+      tags:
+        - Activity
+      responses:
+        '200':
+          description: Activity status updated
+          schema:
+            $ref: '#/definitions/Activity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Clear all activities
+      description: DELETE activities.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+      tags:
+        - Activity
+      responses:
+        '200':
+          description: Activities cleared.
+          schema:
+            $ref: '#/definitions/Activity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/activities/{activityId}':
+    delete:
+      summary: Delete Activity
+      description: Deletes a single Activity based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: activityId
+          in: path
+          description: ID of Activity to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Activity
+      responses:
+        '200':
+          description: Activity deleted
+          schema:
+            $ref: '#/definitions/Activity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /attachments:
+    post:
+      summary: Creates a new Attachment
+      description: Creates a new Attachment
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: class
+          in: query
+          description: Class name (UserAvatar / UserCoverPhoto / Photo / Message).
+          required: true
+          type: string
+          format: string
+        - name: file
+          in: formData
+          description: Create avatar.
+          required: false
+          type: file          
+      tags:
+        - Attachment
+      responses:
+        '200':
+          description: New Attachment added
+          schema:
+            $ref: '#/definitions/Attachment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /cities:
+    post:
+      summary: Create New cities
+      description: Create cities.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: create cities
+          required: true
+          schema:
+            $ref: '#/definitions/addCity'
+      tags:
+        - Cities
+      responses:
+        '200':
+          description: New cities added
+          schema:
+            $ref: '#/definitions/addCity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Filter  cities
+      description: Filter cities.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (active/inactive)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string         
+      tags:
+        - Cities
+      responses:
+        '200':
+          description: Filter cities
+          schema:
+            $ref: '#/definitions/citiesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/cities/{cityId}':
+    delete:
+      summary: DELETE cities by its id
+      description: DELETE cities.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: cityId
+          in: path
+          description: delete by cityId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Cities
+      responses:
+        '200':
+          description: DELETE cities
+          schema:
+            $ref: '#/definitions/citiesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update cities by its id
+      description: Update cities.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: cityId
+          in: path
+          description: cityId
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: cities
+          required: true
+          schema:
+            $ref: '#/definitions/addCity'
+      tags:
+        - Cities
+      responses:
+        '200':
+          description: Update cityId
+          schema:
+            $ref: '#/definitions/addCity'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get cities by its id
+      description: Get city.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: cityId
+          in: path
+          description: cityId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Cities
+      responses:
+        '200':
+          description: Get city
+          schema:
+            $ref: '#/definitions/citiesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /contacts:
+    post:
+      summary: Create New contacts.
+      description: Create contacts.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: Create contacts.
+          required: true
+          schema:
+            $ref: '#/definitions/UserContact'
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: New Contacts added.
+          schema:
+            $ref: '#/definitions/UserContact'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get  admin user contact reviews
+      description: Get  admin user contact reviews
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: Get  admin user contact reviews
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserContact'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/contacts/{contactId}':
+    get:
+      summary: Get particular contact details
+      description: Get particular contact details
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: contactId
+          in: path
+          description: contactId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: Get particular contact details
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: DELETE user contact Id in admin
+      description: DELETE user contact Id in admin
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: contactId
+          in: path
+          description: Delte by contactId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: DELETE user contact Id in admin
+          schema:
+            $ref: '#/definitions/UserContact'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /countries:
+    post:
+      summary: Create New countries
+      description: Create countries.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: create countries
+          required: true
+          schema:
+            $ref: '#/definitions/addCountry'
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: New countries added
+          schema:
+            $ref: '#/definitions/addCountry'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Filter  countries
+      description: Filter countries.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string          
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Filter countries
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/countries/{countryId}':
+    delete:
+      summary: DELETE countries by its id
+      description: DELETE countries.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: countryId
+          in: path
+          description: delete by countryId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: DELETE countries
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update countries by its id
+      description: Update countries.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: countryId
+          in: path
+          description: countryId
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: countries
+          required: true
+          schema:
+            $ref: '#/definitions/addCountry'
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Update countryId
+          schema:
+            $ref: '#/definitions/addCountry'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get countries by its id
+      description: Get country.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: countryId
+          in: path
+          description: countryId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Countries
+      responses:
+        '200':
+          description: Get country
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /email_templates:
+    get:
+      summary: Filter email template.
+      description: Filter email template.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - EmailTemplate
+      responses:
+        '200':
+          description: Filter email template.
+          schema:
+            $ref: '#/definitions/emailTempalteList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/email_templates/{emailTemplateId}':
+    get:
+      summary: Get email template
+      description: |
+        Get email template details
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+        - name: emailTemplateId
+          in: path
+          description: Get email template
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - EmailTemplate
+      responses:
+        '200':
+          description: Get email template
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Updated  email template
+      description: "Updated email template. \n"
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+        - name: emailTemplateId
+          in: path
+          description: Get email template
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Update email template
+          required: true
+          schema:
+            $ref: '#/definitions/emailTempalteUpdate'
+      tags:
+        - EmailTemplate
+      responses:
+        '200':
+          description: Updated branch information sucessfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/emailTempalteUpdate'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /languages:
+    post:
+      summary: Create New languages.
+      description: Create languages.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: create languages.
+          required: true
+          schema:
+            $ref: '#/definitions/addLanguage'
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: New languages added.
+          schema:
+            $ref: '#/definitions/addLanguage'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Filter  languages.
+      description: Filter languages.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (active/inactive)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string   
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: Filter languages.
+          schema:
+            $ref: '#/definitions/languagesList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  '/languages/{languageId}':
+    delete:
+      summary: DELETE languages by its id.
+      description: DELETE languages.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: languageId
+          in: path
+          description: delete by languageId.
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: DELETE languages.
+          schema:
+            $ref: '#/definitions/languagesList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update languages by its id.
+      description: Update languages.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: languageId
+          in: path
+          description: languageId.
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: languages.
+          required: true
+          schema:
+            $ref: '#/definitions/addLanguage'
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: Update languageId.
+          schema:
+            $ref: '#/definitions/addLanguage'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get languages by its id.
+      description: Get language.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: languageId
+          in: path
+          description: languageId.
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Languages
+      responses:
+        '200':
+          description: Get language.
+          schema:
+            $ref: '#/definitions/languagesList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  /messages:
+    post:
+      summary: Creates a new Message
+      description: Creates a new Message
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Message JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addMessage'
+      tags:
+        - Message
+      responses:
+        '200':
+          description: New Message added
+          schema:
+            $ref: '#/definitions/Message'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all Messages
+      description: Returns all Messages from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: parent_message_id
+          in: query
+          description: Parent Message ID
+          required: false
+          type: integer
+          format: int32
+        - name: filter
+          in: query
+          description: Filter Message
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string         
+      tags:
+        - Message
+      responses:
+        '200':
+          description: Fetched Messages
+          schema:
+            $ref: '#/definitions/Message'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/messages/{messageId}':
+    delete:
+      summary: Delete Message
+      description: Deletes a single Message based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: messageId
+          in: path
+          description: ID of Message to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Message
+      responses:
+        '200':
+          description: Message deleted
+          schema:
+            $ref: '#/definitions/Message'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch Message
+      description: Returns a Message based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: messageId
+          in: path
+          description: ID of Message to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Message
+      responses:
+        '200':
+          description: Fetched Message
+          schema:
+            $ref: '#/definitions/Message'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update Message
+      description: Update Message
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: messageId
+          in: path
+          description: parent Message Id value
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Message JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/updateMessage'
+      tags:
+        - Message
+      responses:
+        '200':
+          description: Message status updated
+          schema:
+            $ref: '#/definitions/updateMessage'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /pages:
+    post:
+      summary: Create New page.
+      description: Create page.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: Create page.
+          required: true
+          schema:
+            $ref: '#/definitions/addPage'
+      tags:
+        - Pages
+      responses:
+        '200':
+          description: New page added.
+          schema:
+            $ref: '#/definitions/addPage'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Filter  pages.
+      description: Filter pages.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (active/inactive)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - Pages
+      responses:
+        '200':
+          description: Filter pages.
+          schema:
+            $ref: '#/definitions/pagesList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  '/pages/{pageId}':
+    delete:
+      summary: DELETE page by its id.
+      description: DELETE page.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: pageId
+          in: path
+          description: delete by pageId.
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Pages
+      responses:
+        '200':
+          description: DELETE page.
+          schema:
+            $ref: '#/definitions/pagesList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update page by its id.
+      description: Update page.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: pageId
+          in: path
+          description: pageId.
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: page.
+          required: true
+          schema:
+            $ref: '#/definitions/addPage'
+      tags:
+        - Pages
+      responses:
+        '200':
+          description: Update pageId.
+          schema:
+            $ref: '#/definitions/addPage'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get page by its id.
+      description: Get page.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: pageId
+          in: path
+          description: pageId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Pages
+      responses:
+        '200':
+          description: Get page.
+          schema:
+            $ref: '#/definitions/pagesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /photo_comments:
+    post:
+      summary: Creates a new Photo Comment
+      description: Creates a new Photo Comment
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Photo Comment JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addPhotoComment'
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: New Photo Comment added
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all Photo Comments
+      description: Returns all Photo Comments from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string
+        - name: photo_id
+          in: query
+          description: Photo id
+          required: false
+          type: string
+          format: string                      
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: Fetched Photo Comments
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photo_comments/{photoCommentId}':
+    delete:
+      summary: Delete Photo Comment
+      description: Deletes a single Photo Comment based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoCommentId
+          in: path
+          description: ID of Photo Comment to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: Photo Comment deleted
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update Photo Comment by its id
+      description: Update Photo Comment by its id
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoCommentId
+          in: path
+          description: ID of Photo Comment to update
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: The Photo Comment JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addPhotoComment'
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: Photo Comment updated
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch Photo Comment
+      description: Returns a Photo Comment based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoCommentId
+          in: path
+          description: ID of Photo Comment to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: Fetched Photo Comment
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /flag_categories:
+    post:
+      summary: Creates a new  Flag Category
+      description: Creates a new  Flag Category
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The  Flag Category JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addFlagCategory'
+      tags:
+        - FlagCategory
+      responses:
+        '200':
+          description: New  Flag Category added
+          schema:
+            $ref: '#/definitions/FlagCategory'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all  Flag Categories
+      description: Returns all  Flag Categories from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string            
+      tags:
+        - FlagCategory
+      responses:
+        '200':
+          description: Fetched  Flag Categories
+          schema:
+            $ref: '#/definitions/FlagCategory'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/flag_categories/{flagCategoryId}':
+    delete:
+      summary: Delete  Flag Category
+      description: Deletes a single  Flag Category based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: flagCategoryId
+          in: path
+          description: ID of  Flag Category to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - FlagCategory
+      responses:
+        '200':
+          description:  Flag Category deleted
+          schema:
+            $ref: '#/definitions/FlagCategory'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update  Flag Category by its id
+      description: Update  Flag Category by its id
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: flagCategoryId
+          in: path
+          description: ID of  Flag Category to update
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: The  Flag Category JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addFlagCategory'
+      tags:
+        - FlagCategory
+      responses:
+        '200':
+          description:  Flag Category updated
+          schema:
+            $ref: '#/definitions/FlagCategory'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch  Flag Category
+      description: Returns a  Flag Category based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: flagCategoryId
+          in: path
+          description: ID of  Flag Category to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - FlagCategory
+      responses:
+        '200':
+          description: Fetched  Flag Category
+          schema:
+            $ref: '#/definitions/FlagCategory'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /flags:
+    post:
+      summary: Creates a new  Flag
+      description: Creates a new  Flag
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The  Flag JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addFlag'
+      tags:
+        - Flag
+      responses:
+        '200':
+          description: New  Flag added
+          schema:
+            $ref: '#/definitions/Flag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all  Flags
+      description: Returns all  Flags from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string
+        - name: user_id
+          in: query
+          description: User id
+          required: false
+          type: string
+          format: string
+        - name: photo_id
+          in: query
+          description: Photo id
+          required: false
+          type: string
+          format: string                                  
+      tags:
+        - Flag
+      responses:
+        '200':
+          description: Fetched  Flags
+          schema:
+            $ref: '#/definitions/Flag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/flags/{flagId}':
+    delete:
+      summary: Delete  Flag
+      description: Deletes a single  Flag based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: flagId
+          in: path
+          description: ID of  Flag to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Flag
+      responses:
+        '200':
+          description:  Flag deleted
+          schema:
+            $ref: '#/definitions/Flag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch  Flag
+      description: Returns a  Flag based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: flagId
+          in: path
+          description: ID of  Flag to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Flag
+      responses:
+        '200':
+          description: Fetched  Flag
+          schema:
+            $ref: '#/definitions/Flag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photo/{photoId}/flags':
+    get:
+      summary: Fetch Photo
+      description: Returns a Photo based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Flag
+      responses:
+        '200':
+          description: Fetched Photo
+          schema:
+            $ref: '#/definitions/Flag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /photo_likes:
+    post:
+      summary: Creates a new Photo Like
+      description: Creates a new Photo Like
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Photo Like JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addPhotoLike'
+      tags:
+        - PhotoLike
+      responses:
+        '200':
+          description: New Photo Like added
+          schema:
+            $ref: '#/definitions/PhotoLike'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all Photo Likes
+      description: Returns all Photo Likes from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string
+        - name: photo_id
+          in: query
+          description: Photo id
+          required: false
+          type: string
+          format: string                      
+      tags:
+        - PhotoLike
+      responses:
+        '200':
+          description: Fetched Photo Likes
+          schema:
+            $ref: '#/definitions/PhotoLike'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photo_likes/{photoLikeId}':
+    delete:
+      summary: Delete Photo Like
+      description: Deletes a single Photo Like based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoLikeId
+          in: path
+          description: ID of Photo Like to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoLike
+      responses:
+        '200':
+          description: Photo Like deleted
+          schema:
+            $ref: '#/definitions/PhotoLike'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get Photo Like
+      description: Get a single Photo Like based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoLikeId
+          in: path
+          description: ID of Photo Like to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoLike
+      responses:
+        '200':
+          description: Photo Like fetched
+          schema:
+            $ref: '#/definitions/PhotoLike'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  '/photo/{photoId}/photo_likes':
+    get:
+      summary: Fetch Photo
+      description: Returns a Photo based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoLike
+      responses:
+        '200':
+          description: Fetched Photo
+          schema:
+            $ref: '#/definitions/PhotoLike'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /photos:
+    post:
+      summary: Creates a new Photo
+      description: Creates a new Photo
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The Photo JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addPhoto'
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: New Photo added
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all Photos
+      description: Returns all Photos from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: following
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string
+        - name: user_id
+          in: query
+          description: User id
+          required: false
+          type: string
+          format: string                        
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Fetched Photos
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /photo_tags:
+    get:
+      summary: Fetch all Photo Tags
+      description: Returns all Photo Tags from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string            
+      tags:
+        - PhotoTag
+      responses:
+        '200':
+          description: Fetched Photo Tags
+          schema:
+            $ref: '#/definitions/PhotoTag'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photos/{photoId}':
+    delete:
+      summary: Delete Photo
+      description: Deletes a single Photo based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Photo deleted
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update Photo by its id
+      description: Update Photo by its id
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo to update
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: The Photo JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/updatePhoto'
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Photo updated
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch Photo
+      description: Returns a Photo based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Fetched Photo
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /photo_views:
+    get:
+      summary: Fetch all photo views
+      description: Returns all photo views from the system
+      parameters: 
+        - name: token 
+          in: query 
+          description: OAuth token
+          required: true 
+          type: string 
+          format: string 
+        - name: sort 
+          in: query 
+          description: Fields to sort 
+          required: false 
+          type: string 
+          format: string 
+        - name: sortby 
+          in: query 
+          description: Sort direction 
+          required: false 
+          type: string 
+          format: string 
+        - name: page 
+          in: query 
+          description: Page to fetch 
+          required: false 
+          type: string 
+          format: string 
+        - name: fields 
+          in: query 
+          description: Fields list to fetch 
+          required: false 
+          type: string 
+          format: string 
+        - name: q 
+          in: query 
+          description: Keywords to search 
+          required: false 
+          type: string 
+          format: string
+        - name: photo_id
+          in: query
+          description: Photo id
+          required: false
+          type: string
+          format: string           
+      tags: 
+        - PhotoView
+      responses: 
+        200:
+          description: Fetched photo views
+          schema:
+            $ref: '#/definitions/PhotoView'
+        default:
+          description: Unexpected error 
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Creates a new photo view
+      description: Creates a new photo view
+      parameters: 
+        - name: token 
+          in: query 
+          description: OAuth token
+          required: true 
+          type: string 
+          format: string 
+        - name: body 
+          in: body 
+          description: The photo view JSON you want to post
+          required: true 
+          schema:
+            $ref: '#/definitions/addPhotoView'
+      tags: 
+        - PhotoView
+      responses: 
+        200:
+          description: New photo view added
+          schema:
+            $ref: '#/definitions/PhotoView'
+        default:
+          description: Unexpected error 
+          schema:
+            $ref: '#/definitions/Error'
+  /photo_views/{photoViewId}:
+    get:
+      summary: Fetch photo view
+      description: Returns a photo view based on a single ID 
+      parameters: 
+        - name: token 
+          in: query 
+          description: OAuth token
+          required: true 
+          type: string 
+          format: string 
+        - name: photoViewId
+          in: path 
+          description: ID of photo view to fetch 
+          required: true 
+          type: integer 
+          format: int64 
+      tags: 
+        - PhotoView
+      responses: 
+        200:
+          description: Fetched photo view
+          schema:
+            $ref: '#/definitions/PhotoView'
+        default:
+          description: Unexpected error 
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete photo view
+      description: Deletes a single photo view based on the ID supplied 
+      parameters: 
+        - name: token 
+          in: query 
+          description: OAuth token
+          required: true 
+          type: string 
+          format: string 
+        - name: photoViewId
+          in: path 
+          description: ID of photo view to delete 
+          required: true 
+          type: integer 
+          format: int64 
+      tags: 
+        - PhotoView
+      responses: 
+        200:
+          description: Photo View deleted
+        default:
+          description: Unexpected error 
+          schema:
+            $ref: '#/definitions/Error'            
+  /providers:
+    get:
+      summary: Filter  providers.
+      description: Filter  providers.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (active/inactive)
+          required: false
+          type: string
+          format: string          
+      tags:
+        - Providers
+      responses:
+        '200':
+          description: Get social providers lists
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/providers/{providerId}':
+    get:
+      summary: Get particular social provider
+      description: Get particular social provider
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: providerId
+          in: path
+          description: providerId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Providers
+      responses:
+        '200':
+          description: Get particular social provider
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update particular social provider
+      description: Update particular social provider.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: providerId
+          in: path
+          description: providerId.
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: user.
+          required: true
+          schema:
+            $ref: '#/definitions/updateProvider'
+      tags:
+        - Providers
+      responses:
+        '200':
+          description: particular social provider.
+          schema:
+            $ref: '#/definitions/updateProvider'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  /search:
+    get:
+      summary: Fetch all PhotoTags and Users
+      description: Returns all PhotoTags and Users
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+      tags:
+        - Search
+      responses:
+        '200':
+          description: Fetched PhotoTags and Users
+          schema:
+            $ref: '#/definitions/PhotoTagsUsers'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /setting_categories:
+    get:
+      summary: Get all settings categories list
+      description: Get settings categories list
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - Settings
+      responses:
+        '200':
+          description: Get all settings categories list
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/setting_categories/{settingCategoryId}':
+    get:
+      summary: Get all settings lists based on category ID
+      description: Get all settings lists based on category ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: settingCategoryId
+          in: path
+          description: settingCategoryId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Settings
+      responses:
+        '200':
+          description: Get all settings lists based on category ID
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /settings:
+    get:
+      summary: Filter Settings.
+      description: Filter Settings.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+        - name: setting_category_id
+          in: query
+          description: settings category
+          required: false
+          type: integer
+          format: int64
+      tags:
+        - Settings
+      responses:
+        '200':
+          description: Filter settings  .
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/settings/{settingId}':
+    put:
+      summary: Update settings by its id.
+      description: Update settings.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: settingId
+          in: path
+          description: settingId.
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: settings.
+          required: true
+          schema:
+            $ref: '#/definitions/settingsList'
+      tags:
+        - Settings
+      responses:
+        '200':
+          description: Update settingCategory.
+          schema:
+            $ref: '#/definitions/settingsList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  /states:
+    post:
+      summary: Create New states
+      description: Create states.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: create states
+          required: true
+          schema:
+            $ref: '#/definitions/addState'
+      tags:
+        - States
+      responses:
+        '200':
+          description: New states added
+          schema:
+            $ref: '#/definitions/addState'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Filter  states
+      description: Filter states.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (active/inactive)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+        - name: limit
+          in: query
+          description: limit to set or get all record type "all"
+          required: false
+          type: string
+          format: string         
+      tags:
+        - States
+      responses:
+        '200':
+          description: Filter states
+          schema:
+            $ref: '#/definitions/statesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/states/{stateId}':
+    delete:
+      summary: DELETE states by its id
+      description: DELETE states.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: stateId
+          in: path
+          description: delete by stateId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - States
+      responses:
+        '200':
+          description: DELETE states
+          schema:
+            $ref: '#/definitions/statesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update states by its id
+      description: Update states.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: stateId
+          in: path
+          description: stateId
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: states
+          required: true
+          schema:
+            $ref: '#/definitions/addState'
+      tags:
+        - States
+      responses:
+        '200':
+          description: Update stateId
+          schema:
+            $ref: '#/definitions/addState'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get states by its id
+      description: Get city.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: stateId
+          in: path
+          description: stateId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - States
+      responses:
+        '200':
+          description: Get city
+          schema:
+            $ref: '#/definitions/statesList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/social_login:
+    post:
+      summary: User social login
+      description: User social login post
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: User social login post
+          required: true
+          schema:
+            $ref: '#/definitions/addProvider'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User login posted successfully
+          schema:
+            $ref: '#/definitions/addProvider'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: User social login for twitter
+      description: |
+        User social login for twitter
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+        - name: type
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: 'User social login for twitter '
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /oauth/token:
+    get:
+      summary: Get site token
+      description: Get site token
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Site token
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /oauth/refresh_token:
+    get:
+      summary: Get site refresh token
+      description: Get site refresh token
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Refresh site token
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/logout:
+    get:
+      summary: User Logout
+      description: |
+        Logout user records fetch.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Logout user
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/register:
+    post:
+      summary: new user
+      description: Post new user.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: Post new user fields
+          required: true
+          schema:
+            $ref: '#/definitions/addUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: New user registered successfully.
+          schema:
+            $ref: '#/definitions/addUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/login:
+    post:
+      summary: User login
+      description: User login information post
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: User login information post
+          required: true
+          schema:
+            $ref: '#/definitions/loginUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User login posted successfully
+          schema:
+            $ref: '#/definitions/loginUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/forgot_password:
+    post:
+      summary: 'Enter your Email, and we will send resetting your password.'
+      description: 'Enter your Email, and we will send resetting your password.'
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: Created Forgot Password object
+          required: true
+          schema:
+            $ref: '#/definitions/forgotUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User Forgot password updated successfully
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users:
+    get:
+      summary: Filter  users.
+      description: Filter users.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: filter
+          in: query
+          description: (popular/following/active/inactive/recent)
+          required: false
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: sortby
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: type
+          in: query
+          description: type
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: fields
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+          format: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Filter users.
+          schema:
+            $ref: '#/definitions/usersList'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: 'Admin only access user add api'
+      description: 'Admin only access user add api'
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: Admin Create user
+          required: true
+          schema:
+            $ref: '#/definitions/adminaddUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Admin User  add
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+  '/users/{userId}':
+    get:
+      summary: Get user by its id.
+      description: Get user.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: userId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Get user.
+          schema:
+            $ref: '#/definitions/usersList'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update user by its id.
+      description: Update user.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: userId.
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: user.
+          required: true
+          schema:
+            $ref: '#/definitions/updateUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Update user Details.
+          schema:
+            $ref: '#/definitions/updateUser'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: DELETE user by its id.
+      description: DELETE user.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: delete by userId.
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Users
+      responses:
+        '200':
+          description: DELETE user.
+          schema:
+            $ref: '#/definitions/deleteUser'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/change_password':
+    put:
+      summary: Chang password of user
+      description: "Change password of the particlular user. \n"
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: Change password user
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: Change password user fields
+          required: true
+          schema:
+            $ref: '#/definitions/changePasswordUser'
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Change password of the user updated sucessfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/changePasswordUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/activation/{hash}':
+    put:
+      summary: User activation
+      description: "Send activation hash code to user for activation. \n"
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: user send activation request
+          required: true
+          type: integer
+          format: int64
+        - name: hash
+          in: path
+          description: user send activation hash code request
+          required: true
+          type: string
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User send activation successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/activateUser'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /user_follows:
+    post:
+      summary: Creates a new User Follow
+      description: Creates a new User Follow
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: body
+          in: body
+          description: The User Follow JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addUserFollow'
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: New User Follow added
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch all User Follows
+      description: Returns all User Follows from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: user_id
+          in: query
+          description: User id
+          required: false
+          type: string
+          format: string          
+
+        - name: other_user_id
+          in: query
+          description: Other User id
+          required: false
+          type: string
+          format: string          
+
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: Fetched User Follows
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/user_follows/{userFollowId}':
+    delete:
+      summary: Delete User Follow
+      description: Deletes a single User Follow based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userFollowId
+          in: path
+          description: ID of User Follow to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: User Follow deleted
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get User Follow
+      description: Get a single User Follow based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userFollowId
+          in: path
+          description: ID of User Follow to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: User Follow fetched
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /user_logins:
+    get:
+      summary: Fetch all User Logins
+      description: Returns all User Logins from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+        - name: user_id
+          in: query
+          description: User id
+          required: false
+          type: string
+          format: string            
+      tags:
+        - UserLogin
+      responses:
+        '200':
+          description: Fetched User Logins
+          schema:
+            $ref: '#/definitions/UserLogin'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/user_logins/{userLoginId}':
+    delete:
+      summary: Delete User Login
+      description: Deletes a single User Login based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userLoginId
+          in: path
+          description: ID of User Login to delete
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserLogin
+      responses:
+        '200':
+          description: User Login deleted
+          schema:
+            $ref: '#/definitions/UserLogin'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Get User Login
+      description: Get a single User Login based on the ID supplied
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userLoginId
+          in: path
+          description: ID of User Login to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserLogin
+      responses:
+        '200':
+          description: User Login fetched
+          schema:
+            $ref: '#/definitions/UserLogin'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /stats:
+    get:
+      summary: Fetched following users
+      description: Returns a stats based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+          format: string
+      tags:
+        - stats
+      responses:
+        '200':
+          description: Fetched Venue Zone Preview
+          schema:
+            $ref: '#/definitions/stats'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /user_notification_settings:
+    get:
+      summary: Fetch all User Notification Settings
+      description: Returns all User Notification Settings from the system
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: sort
+          in: query
+          description: Fields to sort
+          required: false
+          type: string
+          format: string
+        - name: sortby
+          in: query
+          description: Sort direction
+          required: false
+          type: string
+          format: string
+        - name: page
+          in: query
+          description: Page to fetch
+          required: false
+          type: string
+          format: string
+        - name: fields
+          in: query
+          description: Fields list to fetch
+          required: false
+          type: string
+          format: string
+        - name: q
+          in: query
+          description: Keywords to search
+          required: false
+          type: string
+          format: string
+      tags:
+        - UserNotificationSetting
+      responses:
+        '200':
+          description: Fetched User Notification Settings
+          schema:
+            $ref: '#/definitions/UserNotificationSetting'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/user_notification_settings/{userNotificationSettingId}':
+    put:
+      summary: Update User Notification Setting by its id
+      description: Update User Notification Setting by its id
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userNotificationSettingId
+          in: path
+          description: ID of User Notification Setting to update
+          required: true
+          type: integer
+          format: int64
+        - name: body
+          in: body
+          description: The User Notification Setting JSON you want to post
+          required: true
+          schema:
+            $ref: '#/definitions/addUserNotificationSetting'
+      tags:
+        - UserNotificationSetting
+      responses:
+        '200':
+          description: User Notification Setting updated
+          schema:
+            $ref: '#/definitions/UserNotificationSetting'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    get:
+      summary: Fetch User Notification Setting
+      description: Returns a User Notification Setting based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userNotificationSettingId
+          in: path
+          description: ID of User Notification Setting to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserNotificationSetting
+      responses:
+        '200':
+          description: Fetched User Notification Setting
+          schema:
+            $ref: '#/definitions/UserNotificationSetting'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/photos':
+    get:
+      summary: Get photo by its id.
+      description: Get photo.
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: userId
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Get photo.
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photo_tags/{photoTagId}/photos':
+    get:
+      summary: Fetch Photo
+      description: Returns a Photo based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoTagId
+          in: path
+          description: ID of Photo to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - Photo
+      responses:
+        '200':
+          description: Fetched Photo
+          schema:
+            $ref: '#/definitions/Photo'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/photos/{photoId}/photo_comments':
+    get:
+      summary: Fetch Photo Comment
+      description: Returns a Photo Comment based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: photoId
+          in: path
+          description: ID of Photo Comment to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - PhotoComment
+      responses:
+        '200':
+          description: Fetched Photo Comment
+          schema:
+            $ref: '#/definitions/PhotoComment'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/user_follows':
+    get:
+      summary: Fetch user follows Comment
+      description: Returns auser follows based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: ID of user follows to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: Fetched user follows
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/user_followings':
+    get:
+      summary: Fetch user follows Comment
+      description: Returns auser follows based on a single ID
+      parameters:
+        - name: token
+          in: query
+          description: OAuth token
+          required: true
+          type: string
+          format: string
+        - name: userId
+          in: path
+          description: ID of user follows to fetch
+          required: true
+          type: integer
+          format: int64
+      tags:
+        - UserFollow
+      responses:
+        '200':
+          description: Fetched user follows
+          schema:
+            $ref: '#/definitions/UserFollow'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Activity:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      owner_user_id:
+        type: integer
+        format: int64
+        description: owner_user_id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      foreign_id:
+        type: integer
+        format: int64
+        description: foreign_id
+      class:
+        type: string
+        description: class
+      type:
+        type: string
+        description: type
+      is_read:
+        type: integer
+        format: int64
+        description: Status of the Activity.
+  activateUser:
+    type: object
+    properties:
+      userId:
+        type: integer
+        format: int64
+        description: User ID
+      hash:
+        type: string
+        format: string
+        description: hash code
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: User ID
+      user_type_id:
+        type: integer
+        format: int64
+        description: User Types
+      email:
+        type: string
+        description: Email of the User.
+      is_active:
+        type: integer
+        format: int64
+        description: Status of the User.
+      username:
+        type: string
+        format: string
+        description: Username of the user.
+      referral_code:
+        type: string
+        format: string
+        description: referred user unique code.
+      password:
+        type: string
+        format: string
+        description: Password of the user.
+  loginUser:
+    type: object
+    properties:
+      username:
+        type: string
+        format: string
+        description: Username of the user.
+      password:
+        type: string
+        format: string
+        description: Password of the user.
+  forgotUser:
+    type: object
+    properties:
+      email:
+        type: string
+        format: string
+        description: Email ID
+  deleteUser:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: User ID.
+  addUser:
+    type: object
+    properties:
+      first_name:
+        type: string
+        description: first_name.
+      last_name:
+        type: string
+        description: last_name.
+      username:
+        type: string
+        description: username.
+      email:
+        type: string
+        description: Email.
+      password:
+        type: string
+        description: Password.
+      is_agree_terms_conditions:
+        type: integer
+        format: int32
+        description: Is agree terms conditions.
+  adminaddUser:
+    type: object
+    properties:
+      first_name:
+        type: string
+        description: first_name.
+      last_name:
+        type: string
+        description: last_name.
+      username:
+        type: string
+        description: username.
+      email:
+        type: string
+        description: Email.
+      password:
+        type: string
+        description: Password.
+      is_agree_terms_conditions:
+        type: integer
+        format: int32
+        description: Is agree terms conditions. 
+      role_id:
+        type: integer
+        format: int32
+        description: Role id.   
+  updateUser:
+    type: object
+    properties:
+      first_name:
+        type: string
+        description: First name.
+      last_name:
+        type: string
+        description: Last name.
+      middle_name:
+        type: string
+        description: Middle name.
+      email:
+        type: string
+        description: Email.        
+      about_me:
+        type: string
+        description: About me.
+
+      full_address:
+        type: string         
+      address:
+        type: string
+        description: Address.
+      city_name:
+        type: integer
+        format: int64
+        description: City Name.
+      state_name:
+        type: integer
+        format: int64
+        description: State Name.
+      country_iso2:
+        type: integer
+        format: int64
+        description: Country ISO2 Code
+      latitude:
+        type: number
+        format: double
+        description: Latitude.
+      longitude:
+        type: number
+        format: double
+        description: Longitude.
+      twitter_username:
+        type: string
+        description: twitter_username
+      facebook_username:
+        type: string
+        description: facebook_username
+      instagram_username:
+        type: string
+        description: instagram_username
+      linkedin_username:
+        type: string
+        description: linkedin_username
+      medium_username:
+        type: string
+        description: medium_username
+      youtube_username:
+        type: string
+        description: youtube_username
+      etsy_username:
+        type: string
+        description: etsy_username
+      educations:
+        type: string
+        description: educations
+      brands:
+        type: string
+        description: brands
+      recognitions:
+        type: string
+        description: recognitions
+      website:
+        type: string
+        description: website
+      image:
+        type: string
+        description: image
+      cover_photo:
+        type: string
+        description: image
+  changePasswordUser:
+    type: object
+    properties:
+      password:
+        type: string
+        description: User password.
+      new_password:
+        type: string
+        description: User new password.
+  usersList:
+    type: object
+    properties:
+      user_type_id:
+        type: integer
+        format: int64
+        description: User Types
+      last_login_ip_id:
+        type: string
+        description: Last login ip id.
+      email:
+        type: string
+        description: Email.
+      password:
+        type: string
+        description: Password.
+      last_logged_in_time:
+        type: string
+        description: Last logged in time.
+      is_email_confirmed:
+        type: integer
+        format: int32
+        description: Is email confirmed.
+      admin_suspend:
+        type: integer
+        format: int32
+        description: Admin suspend.
+      is_agree_terms_conditions:
+        type: integer
+        format: int32
+        description: Is agree terms conditions.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      id:
+        type: integer
+        format: int64
+        description: Id of restaurant.
+      created_at:
+        type: string
+        format: date-time
+        description: Created date time.
+      updated_at:
+        type: string
+        format: date-time
+        description: Updated data time.
+      twitter_username:
+        type: string
+        description: twitter_username
+      facebook_username:
+        type: string
+        description: facebook_username
+      instagram_username:
+        type: string
+        description: instagram_username
+      linkedin_username:
+        type: string
+        description: linkedin_username
+      medium_username:
+        type: string
+        description: medium_username
+      youtube_username:
+        type: string
+        description: youtube_username
+      etsy_username:
+        type: string
+        description: etsy_username
+      educations:
+        type: string
+        description: educations
+      brands:
+        type: string
+        description: brands
+      recognitions:
+        type: string
+        description: recognitions
+      website:
+        type: string
+        description: website
+      middle_name:
+        type: string
+        description: middle_name
+      user_notification_setting_id:
+        type: integer
+        format: int64
+        description: Notification Setting ID of User
+      unread_activities_count:
+        type: integer
+        format: int64
+        description: unread_activities_count
+      unread_messages_count:
+        type: integer
+        format: int32
+        description: unread_messages_count
+      user_following_count:
+        type: integer
+        format: int64
+        description: user_following_count
+      user_follower_count:
+        type: integer
+        format: int64
+        description: user_follower_count
+      is_show_profile_picture_in_search_engine:
+        type: integer
+        format: int32
+        description: is_show_profile_picture_in_search_engine
+      is_show_pictures_in_search_engine:
+        type: integer
+        format: int32
+        description: is_show_pictures_in_search_engine
+      user_login_count:
+        type: integer
+        format: int64
+        description: user_login_count
+      photo_count:
+        type: integer
+        format: int64
+        description: photo_count
+      flag_count:
+        type: integer
+        format: int64               
+  addCountry:
+    type: object
+    properties:
+      iso_alpha2:
+        type: string
+        description: Iso2 of country.
+      iso_alpha3:
+        type: string
+        description: Iso3 of country.
+      fips_code:
+        type: integer
+        description: Ison of country.
+      name:
+        type: string
+        description: Name of country.
+      capital:
+        type: string
+        description: Name of capital.
+      areainsqkm:
+        type: number
+        format: float
+        description: area in sq km.
+      population:
+        type: integer
+        format: int64
+        description: Population of country.
+      continent:
+        type: string
+        description: continent.
+      tld:
+        type: string
+        description: tld.
+      currency:
+        type: string
+        description: currency.
+      currencyname:
+        type: string
+        description: currency name  country.
+      phone:
+        type: string
+        description: phone.
+      postalcodeformat:
+        type: string
+        description: postal code.
+      postalcoderegex:
+        type: string
+        description: postal code regex.
+      languages:
+        type: string
+        description: languages.
+      geonameid:
+        type: integer
+        description: Geo name id.
+      neighbours:
+        type: string
+        description: neighbours.
+      equivalentfipscode:
+        type: string
+        description: equivalent fips code.
+  addState:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of State.
+      country_id:
+        type: integer
+        format: int64
+        description: Country id of State.
+      state_code:
+        type: string
+        description: State code of State.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      slug:
+        type: string
+        description: Slug.
+  statesList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id of State.
+      name:
+        type: string
+        description: Name of State.
+      country_id:
+        type: integer
+        format: int64
+        description: Country id of State.
+      state_code:
+        type: string
+        description: State code of State.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      slug:
+        type: string
+        description: Slug.
+      created_at:
+        type: string
+        description: created.
+      updated_at:
+        type: string
+        description: modified.
+  addCity:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of City.
+      country_id:
+        type: integer
+        format: int64
+        description: Country id of City.
+      state_id:
+        type: integer
+        format: int64
+        description: State id of City.
+      city_code:
+        type: string
+        description: City code of City.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      slug:
+        type: string
+        description: Slug.
+  citiesList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id of City.
+      name:
+        type: string
+        description: Name of City.
+      country_id:
+        type: integer
+        format: int64
+        description: Country id of City.
+      state_id:
+        type: integer
+        format: int64
+        description: State id of City.
+      city_code:
+        type: string
+        description: City code of City.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      slug:
+        type: string
+        description: Slug.
+      created:
+        type: string
+        description: created.
+      modified:
+        type: string
+        description: modified.
+  addPage:
+    type: object
+    properties:
+      title:
+        type: string
+        description: title.
+      slug:
+        type: string
+        description: slug.
+      content:
+        type: string
+        description: content.
+      meta_keywords:
+        type: string
+        description: meta keywords.
+      meta_description:
+        type: string
+        description: meta description.
+      is_active:
+        type: integer
+        format: int32
+        description: Is approved.
+  pagesList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id.
+      title:
+        type: string
+        description: title.
+      slug:
+        type: string
+        description: slug.
+      content:
+        type: string
+        description: content.
+      meta_keywords:
+        type: string
+        description: meta keywords.
+      meta_description:
+        type: string
+        description: meta description.
+      is_active:
+        type: integer
+        format: int32
+        description: Is approved.
+      created:
+        type: string
+        description: created.
+      modified:
+        type: string
+        description: modified.
+  addPhotoComment:
+    type: object
+    required:
+      - photo_id
+      - comment
+    properties:
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+      comment:
+        type: string
+        description: comment
+  PhotoComment:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+      ip_id:
+        type: integer
+        format: int64
+        description: ip_id
+      comment:
+        type: string
+        description: comment
+  addFlagCategory:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: name
+      type:
+        type: string
+        description: name        
+  FlagCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      name:
+        type: string
+        description: name
+      type:
+        type: string
+        description: type        
+  addFlag:
+    type: object
+    required:
+      - flag_category_id
+    properties:
+      flagged_user_id:
+        type: integer
+        format: int64    
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+      flag_category_id:
+        type: integer
+        format: int64
+        description: photo_flag_category_id
+      type:
+        type: string
+        description: type
+  Flag:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+      flag_category_id:
+        type: integer
+        format: int64
+        description: flag_category_id
+      ip_id:
+        type: integer
+        format: int32
+        description: ip_id
+      user_id:
+          type: integer
+          format: int64        
+      type:
+        type: string
+        description: type
+  addPhotoLike:
+    type: object
+    required:
+      - photo_id
+    properties:
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+  PhotoLike:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      photo_id:
+        type: integer
+        format: int64
+        description: photo_id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      ip_id:
+        type: integer
+        format: int64
+        description: ip_id
+  addPhoto:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+        description: description
+      image:
+        type: string
+        description: image
+      tags:
+        type: string
+        description: tags        
+  updatePhoto:
+    type: object
+    required:
+      - description
+    properties:
+      description:
+        type: string
+        description: description
+      tags:
+        type: string
+        description: tags   
+  Photo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      description:
+        type: string
+        description: description
+      photo_comment_count:
+        type: integer
+        format: int32
+        description: photo_comment_count
+      photo_like_count:
+        type: integer
+        format: int32
+        description: photo_like_count
+      photo_flag_count:
+        type: integer
+        format: int32
+        description: photo_flag_count
+  PhotoTagsUsers:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      name:
+        type: string
+        description: name
+      slug:
+        type: string
+        description: slug
+      photo_count:
+        type: integer
+        format: int64
+        description: photo_count     
+      user_type_id:
+        type: integer
+        format: int64
+        description: User Types
+      last_login_ip_id:
+        type: string
+        description: Last login ip id.
+      email:
+        type: string
+        description: Email.
+      password:
+        type: string
+        description: Password.
+      last_logged_in_time:
+        type: string
+        description: Last logged in time.
+      is_email_confirmed:
+        type: integer
+        format: int32
+        description: Is email confirmed.
+      admin_suspend:
+        type: integer
+        format: int32
+        description: Admin suspend.
+      is_agree_terms_conditions:
+        type: integer
+        format: int32
+        description: Is agree terms conditions.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      created_at:
+        type: string
+        format: date-time
+        description: Created date time.
+      updated_at:
+        type: string
+        format: date-time
+        description: Updated data time.
+      twitter_username:
+        type: string
+        description: twitter_username
+      facebook_username:
+        type: string
+        description: facebook_username
+      instagram_username:
+        type: string
+        description: instagram_username
+      linkedin_username:
+        type: string
+        description: linkedin_username
+      medium_username:
+        type: string
+        description: medium_username
+      youtube_username:
+        type: string
+        description: youtube_username
+      etsy_username:
+        type: string
+        description: etsy_username
+      educations:
+        type: string
+        description: educations
+      brands:
+        type: string
+        description: brands
+      recognitions:
+        type: string
+        description: recognitions
+      website:
+        type: string
+        description: website
+      middle_name:
+        type: string
+        description: middle_name
+      user_notification_setting_id:
+        type: integer
+        format: int64
+        description: Notification Setting ID of User
+      unread_activities_count:
+        type: integer
+        format: int64
+        description: unread_activities_count
+      unread_messages_count:
+        type: integer
+        format: int32
+        description: unread_messages_count
+      user_following_count:
+        type: integer
+        format: int64
+        description: user_following_count
+      user_follower_count:
+        type: integer
+        format: int64
+        description: user_follower_count
+      is_show_profile_picture_in_search_engine:
+        type: integer
+        format: int32
+        description: is_show_profile_picture_in_search_engine
+      is_show_pictures_in_search_engine:
+        type: integer
+        format: int32
+        description: is_show_pictures_in_search_engine
+      user_login_count:
+        type: integer
+        format: int64
+        description: user_login_count       
+  addUserFollow:
+    type: object
+    required:
+      - other_user_id
+    properties:
+      other_user_id:
+        type: integer
+        format: int64
+        description: other_user_id
+  UserFollow:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      other_user_id:
+        type: integer
+        format: int64
+        description: other_user_id
+  addLanguage:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name.
+      iso2:
+        type: string
+        description: iso2.
+      iso3:
+        type: string
+        description: iso3.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+  languagesList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id .
+      name:
+        type: string
+        description: Name.
+      iso2:
+        type: string
+        description: iso2.
+      iso3:
+        type: string
+        description: iso3.
+      is_active:
+        type: integer
+        format: int32
+        description: Is active.
+      created:
+        type: string
+        description: created.
+      modified:
+        type: string
+        description: modified.
+  settingsList:
+    type: object
+    properties:
+      setting_category_id:
+        type: integer
+        format: int32
+        description: admin setting list page
+      name:
+        type: string
+        description: setting name.
+      value:
+        type: string
+        description: value.
+      description:
+        type: string
+        description: description.
+      type:
+        type: string
+        description: description.
+      label:
+        type: string
+        description: description.
+      order:
+        type: integer
+        format: int64
+        description: admin setting order value.
+      options:
+        type: string
+        description: description.
+  UserContact:
+    type: object
+    properties:
+      first_name:
+        type: string
+        description: admin get contact first Name.
+      last_name:
+        type: string
+        description: admin get contact last Name.
+      email:
+        type: string
+        description: admin get contact email.
+      phone:
+        type: string
+        description: admin get contact phone.
+      subject:
+        type: string
+        description: admin get contact subject
+      message:
+        type: string
+        description: admin get contact message
+  addProvider:
+    type: object
+    properties:
+      email:
+        type: string
+        description: email id.
+      thrid_party_profile:
+        type: string
+        format: string
+        description: Third party profile details.
+  updateProvider:
+    type: object
+    properties:
+      icon_class:
+        type: string
+        description: Icon class.
+      button_class:
+        type: string
+        description: Icon class.
+      is_active:
+        type: integer
+        format: int64
+        description: Active status.
+  emailTempalteList:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: ID
+      name:
+        type: string
+        format: string
+        description: name
+      description:
+        type: string
+        format: string
+        description: description
+      from:
+        type: string
+        format: string
+        description: from.
+      reply_to:
+        type: string
+        format: string
+        description: reply_to.
+      subject:
+        type: string
+        format: string
+        description: subject.
+      email_variables:
+        type: string
+        format: string
+        description: email_variables.
+      email_content:
+        type: string
+        format: string
+        description: email_content.
+      text_content:
+        type: string
+        format: string
+        description: text_content.
+      is_html:
+        type: integer
+        format: int64
+        description: is_html.
+      is_text:
+        type: integer
+        format: int64
+        description: is_text.
+  emailTempalteUpdate:
+    type: object
+    properties:
+      name:
+        type: string
+        format: string
+        description: name
+      description:
+        type: string
+        format: string
+        description: description
+      from:
+        type: string
+        format: string
+        description: from.
+      reply_to:
+        type: string
+        format: string
+        description: reply_to.
+      subject:
+        type: string
+        format: string
+        description: subject.
+      email_variables:
+        type: string
+        format: string
+        description: email_variables.
+      email_content:
+        type: string
+        format: string
+        description: email_content.
+      text_content:
+        type: string
+        format: string
+        description: text_content.
+      is_html:
+        type: integer
+        format: int64
+        description: is_html.
+      is_text:
+        type: integer
+        format: int64
+        description: is_text.
+  addUserNotificationSetting:
+    type: object
+    properties:
+      is_enable_email_when_someone_follow_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_follow_me
+      is_enable_email_when_someone_mentioned_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_mentioned_me
+      is_enable_email_when_someone_message_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_message_me
+      is_enable_subscribe_me_for_newsletter:
+        type: integer
+        format: int32
+        description: is_enable_subscribe_me_for_newsletter
+      is_enable_subscribe_me_for_weeky_replay:
+        type: integer
+        format: int32
+        description: is_enable_subscribe_me_for_weeky_replay
+  UserNotificationSetting:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      is_enable_email_when_someone_follow_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_follow_me
+      is_enable_email_when_someone_mentioned_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_mentioned_me
+      is_enable_email_when_someone_message_me:
+        type: integer
+        format: int32
+        description: is_enable_email_when_someone_message_me
+      is_enable_subscribe_me_for_newsletter:
+        type: integer
+        format: int32
+        description: is_enable_subscribe_me_for_newsletter
+      is_enable_subscribe_me_for_weeky_replay:
+        type: integer
+        format: int32
+        description: is_enable_subscribe_me_for_weeky_replay
+  addMessage:
+    type: object
+    required:
+      - other_user_id
+      - message
+    properties:
+      other_user_id:
+        type: integer
+        format: int64
+        description: other_user_id
+      parent_message_id:
+        type: integer
+        format: int64
+        description: parent_message_id
+      message:
+        type: string
+        description: message
+      image:
+        type: string
+        description: image
+  updateMessage:
+    type: object
+    required:
+      - is_read
+    properties:
+      is_read:
+        type: integer
+        format: int32
+        description: is_read
+  Message:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      other_user_id:
+        type: integer
+        format: int64
+        description: other_user_id
+      is_sender:
+        type: integer
+        format: int32
+        description: is_sender
+      is_read:
+        type: integer
+        format: int32
+        description: is_read
+      parent_message_id:
+        type: integer
+        format: int64
+        description: parent_message_id
+      message:
+        type: string
+        description: message
+  PhotoTag:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      name:
+        type: string
+        description: name
+      slug:
+        type: string
+        description: slug
+      photo_count:
+        type: integer
+        format: int64
+        description: photo_count
+  updateActivity:
+    type: object
+    properties:
+      is_read:
+        type: integer
+        format: int64
+        description: Read status updating
+      date:
+        type: string
+        format: string
+        description: Date
+      type:
+        type: string
+        description: type           
+  UserLogin:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      user_id:
+        type: integer
+        format: int64
+        description: user_id
+      ip_id:
+        type: integer
+        format: int64
+        description: ip_id
+      user_agent:
+        type: string
+        description: user_agent
+  Attachment:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: id
+      class:
+        type: string
+        description: class
+  addPhotoView:
+    type: object
+    required: [photo_id]
+    properties:
+      photo_id:
+        type: integer
+        format: int64
+  PhotoView:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      photo_id:
+        type: integer
+        format: int64
+      user_id:
+        type: integer
+        format: int64
+      ip_id:
+        type: integer
+        format: int64        
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string
+      fields:
+        type: string
+  stats:
+      type: object
+      properties:
+        count:
+          type: string
+          format: string
+          description: count
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int64
+      message:
+        type: string
+      fields:
+        type: string

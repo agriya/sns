@@ -1,0 +1,43 @@
+<div class="section register search-block ng-scope" ng-controller="searchController">
+    <div class="container">
+        <div class="text-content">
+            <h4>#{{tag}}</h4>
+            <p class="h4"><b>{{total_photos}}</b> posts</p>
+        </div>
+        <div class="panel" ng-show="loader">
+            <p class="no-mar text-bold">Loading ...</p>
+        </div>
+        <div class="panel text-center" ng-show="!loader && !photos.length">
+            <p class="no-mar text-bold">No posts yet</p>
+        </div>
+    </div>
+    <div class="img-block" ng-show="photos.length">
+        <div class="block-images">
+            <div class="container" infinite-scroll-disabled="!enabled" infinite-scroll='pagination()' infinite-scroll-distance='2'>
+                <div class="row" ng-repeat="(key, value) in photos">
+                    <ul class="list-inline col-xs-12 no-pad">
+                        <li ng-repeat="photo in value">
+                            <div class="hover ehover1" ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)">
+                                <a href="discover/{{photo.id}}/{{$index}}" class="img-bg"> <img ng-if="photo.is_video == false && photo.is_attachment_to_view == true" ng-src="{{photo.photos_url}}" alt="[Image: Photo]"> <video id="video" ng-src="{{photo.video_url}}" controls="true" ng-if="photo.is_video == true && photo.is_attachment_to_view == true" width="380" height="370"></video></a>
+                                <div class="overlay fa-inverse">
+                                    <div class="hover-text clearfix">
+                                        <h3 class="h1 htruncate hyphens">{{photo.description}}</h3>
+                                        <div class="vcenter">
+                                            <div>
+                                                <div class="pull-left">
+                                                    <div class="pull-left" ng-click="go(photo.user.id,photo.user.username)"> <img ng-src="{{photo.user_avatar_url}}" width="34" height="34" class="img-circle" alt="[Image: User-img]" title="{{photo.user.username}}"> </div>
+                                                    <h5 class="pull-left hor-space" ng-click="go(photo.user.id,photo.user.username)">{{photo.user.username}}</h5>
+                                                </div>
+                                                <div class="pull-right navbar-btn"> <a href="" ng-show="!photo.is_like"><i class="fa fa-fw fa-heart fa-inverse"></i>{{photo.photo_like_count}}</a> <a href="" ng-show="photo.is_like"><i class="fa fa-fw fa-heart text-danger"></i>{{photo.photo_like_count}}</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

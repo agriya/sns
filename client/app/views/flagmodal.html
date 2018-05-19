@@ -1,0 +1,14 @@
+<div class="section" ng-show="!viewphotos.is_flag">
+    <div class="">
+        <ul class="list-group no-mar text-center">
+            <li class="list-group-item" ng-repeat="flagcategory in flagcategories"><a class="btn btn-md" ng-click="SaveFlag(flagcategory.id)">{{flagcategory.name}}</a></li>
+            <li class="list-group-item"><a class="btn btn-md" ng-click="cancel()">{{'Cancel'|translate}}</a></li>
+        </ul>
+    </div>
+</div>
+<!-------flaged Template------->
+<div class="modal-body" id="modal-body" ng-show="viewphotos.is_flag">
+    <div class="text-center"> <b>You Already Flaged this Photo</b> <br>
+        <div class="top-mspace"> <button class="btn btn-primary" type="button" ng-click="cancel()">Close</button> </div>
+    </div>
+</div>

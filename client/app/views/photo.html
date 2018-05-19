@@ -1,0 +1,55 @@
+<div ng-controller="photoController" class="section navbar-default photo-view ng-scope js-photo-view">
+    <div class="container">
+        <!-- first item -->
+        <div class="item active">
+            <div class="row">
+                <div class="col-md-8 col-sm-7 no-pad"> <img ng-if="photo.is_video == false && photo.is_attachment_to_view == true" class="img-responsive" ng-src="{{photo.photos_url}}" alt="[Image: img]" /> <video id="video" ng-src="{{photo.video_url}}" controls="true" ng-if="photo.is_video == true && photo.is_attachment_to_view == true" width="800" height="600"></video></div>
+                <div class="col-md-4 col-sm-5 resp-carousel">
+                    <div class="media">
+                        <a href="profile/{{photo.user.id}}/{{photo.user.username}}" class="media-left"> <img alt="[Image: Modal-user]" class="img-circle" ng-src="{{photo.user_avatar_url}}" height="30" width="30"> </a>
+                        <div class="media-body">
+                            <a href="profile/{{photo.user.id}}/{{photo.user.username}}> <span class=" text-bold text-13 ">{{photo.user.username}}</span></a> <a ng-click="Login_func()" ng-show="!isAuth" class="pull-right btn btn-primary btn-lg text-10
+                                ">{{'follow'|translate}}</a> <a  ng-click="user_follow()"
+                                ng-show="!follow.isfollow && $root.isAuth && $root.user.id !==photo.user_id" class="pull-right btn btn-primary btn-lg text-10">{{'follow'|translate}}</a> <a ng-click="user_unfollow(follow)" ng-show="follow.isfollow
+                                && $root.isAuth && $root.user.id !==photo.user_id"
+                                class="pull-right btn btn-primary btn-lg text-10 ">{{'unfollow'|translate}}</a> </div </div>
+                        <div custom-scroll>
+                            <div class="clearfix navbar-btn">
+                                <p class="pull-left text-black text-bold">{{photo.photo_like_count}} {{'likes'|translate}}</p>
+                                <p class="pull-left text-black col-sm-offset-1 text-bold">{{photo.photo_comment_count}} {{'comments'|translate}}</p>
+                                <p class="pull-right text-muted" am-time-ago="photo.created_at"></p>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <h4 class="text-10 text-uppercase text-muted"> {{'description'|translate}}</h4>
+                                    <p class="text-black ">{{photo.description}}</p>
+                                </li>
+                                <li class=" ">
+                                    <h4 class="text-10 text-muted text-uppercase">{{'tags'|translate}}</h4> <a href="search/{{phototag.photo_tag.id}}/{{phototag.photo_tag.slug}}" class={{phototag.label}} ng-repeat="phototag in photo.photos_photo_tag ">{{phototag.photo_tag.name}}</a> </li>
+                                <li class="text-13 ">
+                                    <h4 class="text-10 text-muted text-uppercase">{{'comments'|translate}}</h4>{{comment.comment}}
+                                    <p ng-repeat="comment in comments "><span class="text-bold ">{{comment.user.username}}</span>&nbsp;{{comment.comment}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="media" ng-show="isAuth">
+                            <a class="media-left" href="" ng-click="photoLike(photo)" ng-show="!photo.is_like"> <i class="fa fa-heart-o fa-fw fa-2x"></i> </a>
+                            <a class="media-left" href="" ng-click="photoUnLike(photo)" ng-show="photo.is_like"> <i class="fa fa-heart fa-fw fa-2x text-danger"></i> </a>
+                            <div class="media-body row">
+                                <form class="form-horizontal" ng-submit="saveComment()">
+                                    <div class="col-sm-9 "> <input type="text" placeholder="{{ 'Add a comment'|translate}}… " class="pull-left form-control" ng-model="usercomment.comment"> </div> <button type="button" ng-click="openFlagModal(photo)" class="pull-right btn btn-link btn-lg text-10"> <i class="fa fa-circle-o"></i> <i class="fa fa-circle-o"></i> <i class="fa fa-circle-o"></i> </button>                                    </form>
+                            </div>
+                        </div>
+                        <!--------Auth---->
+                        <div class="media" ng-show="!isAuth"> <a href="" ng-click="Login_func()" class="pull-left text-black text-bold ">{{'Log in'|translate}} </a>
+                            <p class="pull-left text-black col-sm-offset-0 text-bold">to like and comment</p>
+                            <div class="media-body row">
+                                <form class="form-horizontal"> <button type="button" ng-click="openFlagModal(photo)" class="pull-right btn btn-link btn-lg text-10"> <i class="fa fa-circle-o"></i> <i class="fa fa-circle-o"></i> <i class="fa fa-circle-o"></i> </button> </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

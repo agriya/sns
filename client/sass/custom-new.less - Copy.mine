@@ -1,0 +1,46 @@
+/** Common Class
+		======== **/
+.ver-big-mspace {
+	margin:30px 0px;
+}	
+
+.bdrColorGray {
+	border-color:#cccccc;
+}
+
+/** Login Section
+		========= **/
+.loginSec {
+    min-height: 513px;
+	.regBtn {
+		padding: 13px 25px;
+	}
+	.logBtn {
+		float:right;
+		padding: 13px 19px;
+		border-color:@brand-primary;
+		color:@brand-primary;
+		&:hover {
+			background-color:@brand-primary;
+			color:#fff;
+		}
+	}
+	.hrBtom {
+		margin-top:30px;
+	}
+}
+
+.smallBlock {
+	width:90%;
+}
+a{
+	&:hover{
+		text-decoration:none;
+	}
+}
+.fooTerlogo{
+	background:url(../images/custom-sprite.png) no-repeat -4px -414px;
+	width:21px;
+	height:13px;
+	float:right;
+}

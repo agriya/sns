@@ -1,0 +1,50 @@
+<div class="home-banner">
+    <div class="vcenter">
+        <div class="fa-inverse">
+            <h3 class="text-72 play-fair-display">{{'More than just a runway'|translate}}</h3>
+            <p class="h3">{{"The world's leading show and tell for fashion designers"|translate}}</p>
+        </div>
+    </div>
+</div>
+<div class="img-block" ng-controller="trendingController">
+    <ol class="breadcrumb text-center" affixer>
+        <li><a href="discover" title="Discover">{{'Discover'|translate}}</a></li>
+        <li ng-show="$root.isAuth"><a href="following" title="Following">{{'Following'|translate}}</a></li>
+        <li ng-show="!$root.isAuth"><a href="" ng-click="openLoginModal('/following','/trending')" title="Following">{{'Following'|translate}}</a></li>
+        <li class="active">{{'Recent'|translate}}</li>
+    </ol>
+    <div class="block-images">
+        <div class="container" infinite-scroll-disabled="!enabled" infinite-scroll='pagination()' infinite-scroll-distance='2'>
+            <div class="row" ng-repeat="(key, value) in photos">
+                <ul class="list-inline col-xs-12 no-pad">
+                    <li ng-repeat="photo in value">
+                        <div class="hover ehover1" ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)">
+                            <a href="discover/{{photo.id}}/{{$index}}" class="img-bg">
+                                <!--<img ng-src="{{photo.photos_url}}" alt="[Image: Photo]"> -->
+                                <span ng-if="photo.is_video == false && photo.is_attachment_to_view == true" afkl-lazy-image="{{photo.photos_url}}" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></span> 
+                                <span><video id="video" ng-src="{{photo.video_url}}" controls="true" ng-if="photo.is_video == true && photo.is_attachment_to_view == true" width="380" height="370"></video></span>
+                            </a>
+                            <div class="overlay fa-inverse">
+                                <div class="hover-text clearfix">
+                                    <h3 class="h1 htruncate hyphens">{{photo.description}}</h3>
+                                    <div class="vcenter">
+                                        <div>
+                                            <div class="pull-left">
+                                                <div class="pull-left" ng-click="go(photo.user.id,photo.user.username)"><img ng-src="{{photo.user_avatar_url}}" width="34" height="34" class="img-circle" alt="[Image: User-img]" title="{{photo.user.username}}"></a>
+                                                </div>
+                                                <h5 ng-click="go(photo.user.id,photo.user.username)" class="pull-left hor-space">{{photo.user.username}}</a>
+                                                </h5>
+                                            </div>
+                                            <div class="pull-right navbar-btn"> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)" ng-show="!photo.is_like"><i class="fa fa-fw fa-heart fa-inverse"></i>{{photo.photo_like_count}}</a> <a ng-click="openPhotoModal(photo.id,photo.description,$index,'lg', key)"
+                                                    ng-show="photo.is_like"><i class="fa fa-fw fa-heart text-danger"></i>{{photo.photo_like_count}}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

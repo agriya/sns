@@ -1,0 +1,40 @@
+<div class="" ng-controller="PhotoaddController">
+    <div class="" ng-show="!photo_show">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-border text-center">
+                    <div class="h4">
+                        <div ngf-select="" ng-model="file" ngf-drop="" ngf-model-invalid="invalidFiles" ng-change="upload(file)" ngf-model-options="modelOptionsObj" ngf-multiple="multiple" ngf-pattern="pattern" ngf-accept="acceptSelect" ng-disabled="disabled"
+                            ngf-capture="capture" ngf-drag-over-class="dragOverClassObj" ngf-validate="validateObj" ngf-resize="{width: 520, height: 560}" ngf-resize-if="resizeIfFn($file, $width, $height)" ngf-dimensions="dimensionsFn($file, $width, $height)"
+                            ngf-duration="durationFn($file, $duration)" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-fix-orientation="orientation" ngf-max-files="maxFiles" ngf-ignore-invalid="ignoreInvalid" ngf-run-all-validations="runAllValidations" ngf-allow-dir="allowDir"
+                            class="drop-box ng-pristine ng-valid" ngf-drop-available="dropAvailable">
+                            <h4>Drop it </h4>
+                            <p>like it’s hot!</p> <img src="images/upload-icon.jpg" alt="[Images: Upload-icon]" title="upload-icon">
+                            <p class="browse">or <a href="" title="browse">browse</a> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" ng-show="photo_show">
+        <div class="modal-content">
+            <div class="row upload2">
+                <div class="col-sm-5 col-md-7" ng-if="video_show==false"> <img ngf-src="file" alt="[Image: Group]" title="Group" ngf-resize="{width: 520, height: 560}" width="520" height="560" class="img-responsive center-block"> </div>
+                <div class="col-sm-5 col-md-7" ng-if="video_show==true"> <img src="images/Videoprocessing.png" alt="[Image: Video Processing]" title="Group" ngf-resize="{width: 520, height: 560}" width="520" height="560" class="img-responsive center-block"> </div>
+                <div class="col-sm-7 col-md-5 resp-modal">
+                    <form class="form-horizontal" ng-submit="PhotoUpload()">
+                        <div class="form-group ver-space"> <label for="description" class="control-label text-10">Descrption</label> <input type="text" id="description" ng-model="attachment.description" placeholder="Give your picture a short description" class="form-control"> </div>
+                        <div
+                            class="form-group no-mar has-feedback"> <label for="tags" class="control-label text-10">tags</label>
+                            <tags-input ng-model="tags" type="search" id="tags" add-on-paste="true" placeholder="search through tags or create new ones">
+                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0"></auto-complete>
+                            </tags-input> <span class="icon-m-magnifier form-control-feedback"></span></div>
+                <div class="vcenter">
+                    <div> <a href="" class="btn btn-link text-12" ng-click="ModelCancel()">cancel</a> <button type="submit" class="btn btn-primary btn-lg text-12">submit</button> </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

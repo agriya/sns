@@ -1,0 +1,22 @@
+<div class="settings" ng-controller='UsersSocialMediaController'>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 left-side">
+                <div class="white-bg" ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 tab-content">
+                <!-- media -->
+                <div class="profile tab-pane active" id="social-media">
+                    <form class="" role="form" name="userSocialMedia" ng-submit="save()">
+                        <div class="form-group"> <label for="inputFacebook">{{'facebook'|translate}}</label> <input type="text" ng-model="user.facebook_username" class="form-control" id="inputFacebook" placeholder=""> </div>
+                        <div class="form-group"> <label for="inputTwitter" class="pull-left">{{'twitter'|translate}}</label> <input type="text" ng-model="user.twitter_username" class="form-control" id="inputTwitter" placeholder=""></div>
+                        <div class="form-group"> <label for="inputInstagram" class="pull-left">{{'instagram'|translate}}</label> <input type="text" ng-model="user.instagram_username" class="form-control" id="inputInstagram" placeholder=""> </div>
+                        <div class="form-group"> <label for="inputLinkedin" class="pull-left">{{'linkedin'|translate}}</label> <input type="text" ng-model="user.linkedin_username" class="form-control" id="inputLinkedin" placeholder=""></div>
+                        <div class="form-group"> <label for="inputYoutube" class="pull-left">{{'youtube'|translate}}</label> <input type="text" ng-model="user.youtube_username" class="form-control" id="inputYoutube" placeholder=""> </div>
+                        <div class="form-group"> <label for="inputMedium" class="pull-left">{{'medium'|translate}}</label> <input type="text" ng-model="user.medium_username" class="form-control" id="inputMedium" placeholder=""> </div>
+                        <div class="form-group"> <label for="inputEtsy" class="pull-left">{{'etsy'|translate}}</label> <input type="text" ng-model="user.etsy_username" class="form-control" id="inputEtsy" placeholder=""> </div> <button type="submit" class="btn btn-primary btn-lg ver-mspace">{{'Update'|translate}}</button>                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

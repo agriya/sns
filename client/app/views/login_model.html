@@ -1,0 +1,10 @@
+<div class="modal-header login-register-modal" ng-controller="MainCtrl"> <button type="button" class="close" ng-click="cancel()">x</button> <br>
+    <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading="Login" ng-click="switch_tab('login')"> <br>
+            <div ng-include="'views/user_login.html'"></div>
+        </uib-tab>
+        <uib-tab index="1" heading="Register" ng-click="switch_tab('register')"> <br>
+            <div ng-include="'views/user_register.html'"></div>
+        </uib-tab>
+    </uib-tabset>
+</div>

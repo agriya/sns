@@ -1,0 +1,28 @@
+<div class="settings" ng-controller='UsersPrivacyController'>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 left-side">
+                <div class="white-bg" ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 tab-content">
+                <!-- privacy -->
+                <div class="tab-pane active" id="privacy">
+                    <h4 class="blackc bot-ver-space">{{'Third-Party Settings'|translate}}</h4>
+                    <p class="blackc">{{'Allow Mæsure to'|translate}}:</p>
+                    <form class="blackc" name="userPrivacy" ng-submit="save()">
+                        <div class="checkbox"> <label for="profile">
+                                        <input type="checkbox" id="profile" ng-model="user.is_show_profile_picture_in_search_engine"> 
+                                        <span>{{'show your profile picture in search engines'|translate}}</span> 
+                                    </label> </div>
+                        <div class="checkbox"> <label for="posts_pictures">
+                                       <input type="checkbox" id="posts_pictures" ng-model="user.is_show_pictures_in_search_engine"> 
+                                        <span>{{'show your posts in search engines'|translate}}</span>
+                                     </label> </div>
+                        <div class="colxs-12 pull-right"> <a href="" title="Delete your account" ng-click="delete()" class="space text-10">{{'Delete your account'|translate}}</a>
+                            <!--<a href="javascript:void(0);" class="btn btn-primary btn-lg text-12">Update</a> </div>--><button type="submit" class="btn btn-primary btn-lg text-12">{{'Update'|translate}}</button> </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

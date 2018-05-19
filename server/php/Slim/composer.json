@@ -1,0 +1,27 @@
+{
+	"name": "Base",
+	"description": "Base",
+	"keywords": [
+		"Base",
+		"slim"
+	],
+	"type": "project",
+	"minimum-stability": "RC",
+	"require": {
+		"slim/slim": "3.*",
+		"illuminate/database": "*",
+		"illuminate/pagination": "^5.2",
+		"illuminate/events": "5.4.36",
+		"illuminate/validation": "^5.3",
+		"illuminate/support": "*",
+		"illuminate/translation": "*",
+		"swiftmailer/swiftmailer": "5.4.5",
+		"pavlakis/slim-cli": "*"
+	},
+	 "autoload": {
+		"psr-4": {
+			"Models\\": "lib/Models/"
+		}
+	}
+
+}

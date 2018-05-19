@@ -1,0 +1,35 @@
+<div class="settings" ng-controller='UsersSettingsCtrl'>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 left-side">
+                <div class="white-bg" ng-include="'views/users_account_left_side_menu.html'"></div>
+            </div>
+            <div class="col-sm-9 tab-content">
+                <!-- profile -->
+                <div class="profile tab-pane active" id="profile">
+                    <form class="profile-form" role="form" name="userSettings" ng-submit="save()">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4"> <label for="inputFirstName" class="text-uppercase">{{'first name'|translate}}</label> <input type="text" ng-model="user.first_name" class="form-control" id="inputFirstName" placeholder="" required> </div>
+                                <div class="col-sm-4">
+                                <label for="inputMiddleName" class="text-uppercase">{{'middle name'|translate}}</label> <input type="text" ng-model="user.middle_name" class="form-control" id="inputMiddleName" placeholder="{{'optional'|translate}}"> </div>
+                                <div class="col-sm-4"> <label for="inputLastName" class="text-uppercase">{{'last name'|translate}}</label> <input type="text" ng-model="user.last_name" class="form-control mbtm-smspace" id="inputLastName" placeholder="" required> </div>
+                            </div>
+                        </div>
+                        <div class="form-group"> <label for="inputEmail" class="text-uppercase">{{'email address'|translate}}</label> <input type="email" ng-model="user.email" class="form-control" id="inputEmail" placeholder="{{'example@gmail.com'|translate}}"> </div>
+                        <div class="form-group">
+                        <label for="inputLocation" class="text-uppercase">{{'location'|translate}}</label> <input type="text" g-places-autocomplete ng-model="place" autocomplete="off" class="form-control" id="inputLocation" placeholder="">
+                            <div class="form-group">
+                            <label for="inputWebsite" class="text-uppercase">{{'website'|translate}}</label> <input type="text" ng-model="user.website" class="form-control" id="inputWebsite" placeholder=""> </div>
+                            <div class="form-group"> <label for="inputBio" class="pull-left text-uppercase">{{'bio'|translate}}</label>
+                                <h6 class="pull-right text-muted">169</h6> <textarea class="form-control" rows="4" placeholder="comments" ng-model="user.about_me"></textarea> </div>
+                            <div class="form-group"> <label for="inputEducation" class="text-uppercase">{{'education'|translate}}</label> <input type="text" ng-model="user.educations" class="form-control" id="inputEducation" placeholder=""> </div>
+                            <div class="form-group"> <label for="recognitions" class="text-uppercase">{{'recognitions'|translate}}</label><input type="text" ng-model="user.recognitions" class="form-control" id="inputRecognitions" placeholder=""> </div>
+                            <div class="form-group">
+                            <label for="inputBrands" class="text-uppercase">{{'brands'|translate}}</label> <input type="text" ng-model="user.brands" class="form-control" id="inputBrands" placeholder=""> </div> <button type="submit" class="btn btn-lg btn-primary">{{'Update'|translate}}</button>                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

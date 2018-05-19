@@ -1,0 +1,5 @@
+<div class="form-group" ng-class="{ 'has-error' : (PaymentForm.$submitted || PaymentForm.payment_note.$touched) && (PaymentForm.payment_note.$pristine || PaymentForm.payment_note.$invalid) }"> <label class="col-md-3 col-sm-3 control-label" for="payment_note">{{'Payment Note'|translate}}</label>
+    <div class="col-md-5 col-sm-9"> <textarea class="form-control" ng-model="buyer.payment_note" name="payment_note" id="payment_note" placeholder="Payment Note" ng-required="true"></textarea>
+        <div class="help-block" ng-show="(PaymentForm.$submitted || PaymentForm.payment_note.$touched) && (PaymentForm.payment_note.$pristine || PaymentForm.payment_note.$invalid) && (PaymentForm.payment_note.$error.required)">{{'Required'|translate}}</div>
+    </div>
+</div>

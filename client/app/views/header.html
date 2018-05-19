@@ -1,0 +1,67 @@
+<!-- Header Start -->
+<div class="navbar navbar-default list-group-item-text">
+    <div class="container">
+        <div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <h1 class="list-group-item-heading">
+                <a class="navbar-brand" href="/"><img height="26" src="images/logo.png" alt="[Image: Logo]" title="{{'Maesure'|translate}}"></a>
+            </h1>
+        </div>
+        <div class="collapse navbar-collapse text-center" id="navbar-ex-collapse">
+            <div class="pull-left">
+                <form class="normal navbar-btn">
+                    <div class="form-group has-feedback"> <label class="control-label sr-only" for="search">{{'search'|translate}}</label>
+                        <div class="dropdown-toggle clearfix" data-toggle="dropdown" disabled> <input class="form-control" id="search" placeholder="{{'Search for tags and designers…'|translate}}" ng-model="search" ng-click="usersearch(search)" ng-change="usersearch(search)" autocomplete="off"><span class="icon-m-magnifier form-control-feedback"
+                                aria-hidden="true"></span> </div>
+                        <div class="hor-space navbar-btn dropdown-menu" id="js-search">
+                            <h6 class="text-uppercase text-muted text-10">{{'tags'|translate}}</h6>
+                            <ul class="list-unstyled label-list">
+                                <li ng-show="!tags.length">
+                                    <p ng-show="loader">{{'loading...'|translate}}</p>
+                                    <p ng-show="!loader">{{'no tag found'|translate}}</p>
+                                </li>
+                                <li ng-repeat="tag in tags | limitTo : 3"> <a href="search/{{tag.id}}/{{tag.name}}" class={{tag.label}}>{{tag.name}}</a> </li>
+                            </ul>
+                            <div>
+                                <h6 class="text-uppercase text-10 text-muted">{{'People'|translate}}</h6>
+                                <ul class="list-unstyled">
+                                    <li ng-show="!users.length">
+                                        <p ng-show="loader">{{'loading...'|translate}}</p>
+                                        <p ng-show="!loader">{{'no people found'|translate}}</p>
+                                    </li>
+                                    <li ng-repeat="user in users | limitTo : 3" class="navbar-btn">
+                                        <div class="media">
+                                            <a href="profile/{{user.id}}/{{user.username}}" class="media-left" title="{{user.username}}"> <img ng-src={{user.user_avatar_url}} width="40" height="40" alt="[Image: User-img]" class="img-circle"> </a>
+                                            <div class="media-body">
+                                                <a href="profile/{{user.id}}/{{user.username}}">
+                                                    <h5 class="media-heading text-13 text-bold blackc"> {{user.username}} </h5>
+                                                </a>
+                                                <p class="text-13 text-muted">{{user.city}}{{user.state}}{{user.country}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"> <a href="/">{{'Home'|translate}}</a> </li>
+                <li> <a href="designer/popular"> {{'Designers'|translate}}</a> </li>
+                <li ng-show="$root.isAuth"> <a href="" ng-click="openPhotoUploadModal('md')"><span class="btn btn-primary text-10 btn-lg">{{'Upload'|translate}}</span></a> </li>
+                <li ng-show="!$root.isAuth"> <a href="" class="fa-inverse text-danger" ng-click="openLoginModal()"><i class="fa fa-fw fa-user"></i>{{'Log in or Sign up'|translate}}</a> </li>
+                <li ng-show="$root.isAuth">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><img ng-src={{user.header_avatar_url}} width="25" height="25" alt="[Image: User-img]" title="{{user.username}}" class="img-circle"> <sup class="badge badge-danger" ng-show="user.unread_activities_count > 0">{{user.unread_activities_count}}</sup></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="notifications" title="{{'Notifications'|translate}}" class="clearfix"><i class="icon-m-peace-flag-center-of-three-dots pull-left"></i><span class="badge pull-right" ng-show="user.unread_activities_count > 0">{{user.unread_activities_count}}</span>{{'Notifications'|translate}}</a></li>
+                        <li><a href="profile/{{user.id}}/{{user.username}}" title="{{'Profile'|translate}}"><i class="icon-m-person"></i>{{'Profile'|translate}}</a></li>
+                        <li><a href="users/settings" title="{{'Settings'|translate}}"><i class="icon-m-settings"></i>{{'Settings'|translate}}</a></li>
+                        <li><a href="" title="{{'Help'|translate}}"><i class="icon-m-settings-phone"></i>{{'Help'|translate}}</a></li>
+                        <li><a href="users/logout" title="{{'Logout'|translate}}"><i class="icon-m-exit-to-app"></i>{{'Logout'|translate}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
