@@ -1,6 +1,6 @@
 # Social Networking Solution
 
-Agriya SNS is an open source Soccial Network Solution that is view to offering a platform that showcases users personal and professional aspirations. It is written in AngularJS with REST API for high performance in mind.
+Agriya SNS is an open source Social Network Solution that is view to offering a platform that showcases users personal and professional aspirations. It allows them to explore and share their creative abilities, interests and places of interest. Special features also include posting personal images & videos. It is written in AngularJS with REST API for high performance in mind.
 
 > This is project is part of Agriya Open Source efforts. Social Networking Solution was originally a paid script and was selling around 10000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
