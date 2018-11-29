@@ -1,11 +1,15 @@
-# Social Networking Solution
+# SNS (Photo sharing / Instagram / Flickr / Dribbble / Behance / Social Networking)
 
-Agriya SNS is an open source Social Network Solution that is view to offering a platform that showcases users personal and professional aspirations. It allows them to explore and share their creative abilities, interests and places of interest. Special features also include posting personal images & videos. It is written in AngularJS with REST API for high performance in mind.
+Social Networking Solution
+
+Agriya SNS is an open source Social Network Solution for photo sharing communities sites similar to Instagram, Flickr, Dribbble, Behance, etc offering to showcase users personal and professional aspirations. It allows them to explore and share their creative abilities, interests and places of interest. Special features also include posting personal images & videos. It is written in AngularJS with REST API for high performance in mind.
 
 > This is project is part of Agriya Open Source efforts. Social Networking Solution was originally a paid script and was selling around 10000 Euros. It is now released under dual license (OSL 3.0 & Commercial) for open source community benefits.
 
-![instagram_banner](https://user-images.githubusercontent.com/4700341/48553830-b030e180-e902-11e8-8eff-d239becf17d4.png)
-![instagram_discover](https://user-images.githubusercontent.com/4700341/48554083-76aca600-e903-11e8-8223-a92b2a319937.png)
+
+## Screenshot
+
+![instagram-clone-agriya-sns](https://user-images.githubusercontent.com/4907427/49232786-a33fe200-f41a-11e8-871e-2283841b0bfb.png)
 
 ## Support
 
