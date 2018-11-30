@@ -9,11 +9,24 @@ Agriya SNS is an open source Social Network Solution for photo sharing communiti
 
 ![instagram-clone-agriya-sns](https://user-images.githubusercontent.com/4907427/49232786-a33fe200-f41a-11e8-871e-2283841b0bfb.png)
 
+## Demo / Download
+
+https://www.agriya.com/solutions/social-networking-solution
+
 ## Support
 
 Social Networking Solution is an open source project. Full commercial support (commercial license, customization, training, etc) are available through [Social Networking Solution support](https://www.agriya.com/solutions/social-networking-solution)
 
 Theming partner [CSSilize for design and HTML conversions](http://cssilize.com/)
+
+## Use cases of Instagram clone / Dribbble clone / Flickr clone / Behance clone / Photo sharing social networking solution
+
+* Talent showcase
+* Talent sourcing
+* Community building
+* Social networking
+* Photo gallery
+
 
 ## Getting Started
 
