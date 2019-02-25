@@ -65,6 +65,6 @@ All Submissions you make to SNS through GitHub are subject to the following term
 
 ### License
 
-Copyright (c) 2014-2018 [Agriya](https://www.agriya.com/).
+Copyright (c) 2014-2019 [Agriya](https://www.agriya.com/).
 
 Dual License (OSL 3.0 & [Commercial License](https://www.agriya.com/contact))
